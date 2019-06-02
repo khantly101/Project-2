@@ -1,17 +1,16 @@
 //////////////////////////////
 // CONTROLLER
 //////////////////////////////
-require('dotenv').config()
 
 const express 			= require('express')
 const mongoose 			= require('mongoose')
 const methodOverride 	= require('method-override')
 const session			= require('express-session')
-
-// const controller 	= require('./controller/.js')
+const controllerMain 	= require('./controllers/main.js')
+const controllerUser	= require('./controllers/user.js')
 
 const app 				= express()
-const port 				= process.env.PORT
+const port 				= 3000
 
 //////////////////////////////
 // MONGOOSE
@@ -27,13 +26,18 @@ mongoose.connection.once('open', () => {
 // MIDDLEWARE
 //////////////////////////////
 
+app.use(session({
+	secret: "potato",
+	resave: false,
+	saveUninitialized: false
+}))
+
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(express.static('./public'))
-
-// app.use('/', controller)
-
+app.use('/main', controllerMain)
+app.use('/user', controllerUser)
 
 //////////////////////////////
 // LISTEN

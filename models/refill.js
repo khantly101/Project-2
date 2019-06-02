@@ -4,6 +4,6 @@ const name = new mongoose.Schema({
 
 })
 
-const name = mongoose.model('Schema', name)
+const potato = mongoose.model('Schema', name)
 
 module.exports = name

@@ -2,18 +2,17 @@
 // CONTROLLER
 //////////////////////////////
 
-const express = require('express')
+const express 	= require('express')
+const model 	= require('../models/refill.js')
 
-// const model = require('../models/.js')
-
-const router = express.router()
+const router 	= express.Router()
 
 //////////////////////////////
 // INDEX 
 //////////////////////////////
 
 router.get('/', (req, res) => {
-
+	res.render('index.ejs')
 })
 
 //////////////////////////////
@@ -23,7 +22,6 @@ router.get('/', (req, res) => {
 router.get('/new', (req, res) => {
 	res.render('new.ejs')
 })
-
 
 //////////////////////////////
 // CREATE

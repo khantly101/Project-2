@@ -1,0 +1,41 @@
+/*/////////////////////////*/
+/*////////SIDENAV/////////*/
+/*///////////////////////*/
+
+.sidenav {
+	width: 15vw;
+}
+
+.gasIconContainer {
+	height: 8.6vh;
+}
+
+.gasIcon {
+	margin-left: 2%;
+}
+
+.sideNavButtonContainer {
+	margin: 1%;
+}
+
+.sideNavButton {
+	margin: 1%;
+}
+
+/*/////////////////////////*/
+/*////////LOGIN///////////*/
+/*///////////////////////*/
+
+.login {
+	margin: 0 auto;
+	text-align: center;
+}
+
+@media (min-width: 993px){
+	.middleBar {
+		margin: 0 auto;
+		width: 0px;
+		height: 40vh;
+		border-left: 2px solid gray;
+	}
+}

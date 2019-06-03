@@ -36,15 +36,15 @@ router.post('/', (req, res) => {
 //////////////////////////////
 
 router.get('/:id', (req, res) => {
-
+	res.render('show.ejs')
 })
 
 //////////////////////////////
 // EDIT
 //////////////////////////////
 
-router.get('/id/edit', (req, res) => {
-
+router.get('/:id/edit', (req, res) => {
+	res.render('edit.ejs')
 })
 
 //////////////////////////////

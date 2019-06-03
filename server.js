@@ -37,7 +37,15 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(express.static('./public'))
 app.use('/main', controllerMain)
-app.use('/user', controllerUser)
+app.use('/users', controllerUser)
+
+//////////////////////////////
+// Index
+//////////////////////////////
+
+app.get('/', (req, res) => {
+	res.redirect('/main')
+})
 
 //////////////////////////////
 // LISTEN

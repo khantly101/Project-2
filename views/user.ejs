@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<% include ../partials/head.ejs %>
+	</head>
+	<body>
+		<% include ../partials/nav.ejs %>
+		<br>
+		<div class="row container login">
+			<div class="col l1">
+				
+			</div>
+			<div class="col l4 s12">
+				<h4>Login Here</h3>
+				<form>
+					Username: <input type="text" name="username" placeholder="username">
+					Password: <input type="password" name="password">
+					<button type="submit" class="btn waves-effect waves-light">Login <i class="material-icons right">publish</i></button>
+				</form>
+			</div>
+			<div class="col l1">
+				<br>
+				<div class="middleBar">
+					
+				</div>
+				<br>
+			</div>
+			<div class="col l4 s12">
+				<h4>Sign Up Here</h3>
+				<form action="/users" method="POST">
+					Username: <input type="text" name="username" placeholder="username">
+					Password: <input type="password" name="password">
+					<button type="submit" class="btn waves-effect waves-light">Sign Up<i class="material-icons right">publish</i></button>
+				</form>
+			</div>
+			<div class="col l1">
+				
+			</div>
+		</div>
+	</body>
+</html>

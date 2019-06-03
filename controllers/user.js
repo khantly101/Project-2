@@ -3,7 +3,7 @@
 //////////////////////////////
 
 const express 	= require('express')
-const model 	= require('../models/user.js')
+const User 		= require('../models/user.js')
 
 const router 	= express.Router()
 
@@ -11,8 +11,8 @@ const router 	= express.Router()
 // NEW
 //////////////////////////////
 
-router.get('/new', (req, res) => {
-	res.render('users/new.ejs')
+router.get('/', (req, res) => {
+	res.render('user.ejs')
 })
 
 //////////////////////////////
@@ -20,39 +20,50 @@ router.get('/new', (req, res) => {
 //////////////////////////////
 
 router.post('/', (req, res) => {
-
+	User.create(req.body, (err, createdUser) => {
+		res.redirect('http://localhost:3000/main')
+	})
 })
 
 //////////////////////////////
-// SHOW
+// LOGIN
 //////////////////////////////
 
-router.get('/:id', (req, res) => {
-
+router.post('/', (req, res) => {
+	User.findOne({ username: req.body.username }, (err, foundUser) => {
+		if (req.body.password === foundUser.password) {
+			req.session.currentUser = foundUser
+			res.redirect('http://localhost:3000/main')
+		} else {
+			res.send('wrong password')
+		}
+	})
 })
 
 //////////////////////////////
 // EDIT
 //////////////////////////////
 
-router.get('/id/edit', (req, res) => {
+// router.get('/id/edit', (req, res) => {
 
-})
+// })
 
 //////////////////////////////
 // UPDATE
 //////////////////////////////
 
-router.put('/:id', (req, res) => {
+// router.put('/:id', (req, res) => {
 
-})
+// })
 
 //////////////////////////////
 // DELETE
 //////////////////////////////
 
-router.delete('/:id', (req, res) => {
-	
+router.delete('/', (req, res) => {
+	req.session.destroy(() => {
+		res.redirect('/')
+	})
 })
 
 module.exports = router

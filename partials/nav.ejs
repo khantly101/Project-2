@@ -14,8 +14,8 @@
 					<li class="active sideNavButton"><a href="#"><i class="material-icons">account_box</i>Profile</a></li>
 					<li class="active sideNavButton"><a href="#"><i class="material-icons">add</i>New Data</a></li>
 					<li class="active sideNavButton"><a href="#"><i class="material-icons">map</i>Maps</a></li>
-					<form action="/users?_method=DELETE" method="POST">
-						<li class="active sideNavButton"><a href="#"><i class="material-icons">cancel</i>Log Out</a></li>
+					<form class="logout" action="/users?_method=DELETE" method="POST">
+						<li class="active sideNavButton"><a href="#" onclick="logout()"><i class="material-icons">cancel</i>Log Out</a></li>
 					</form>
 				</div>
 			</ul>

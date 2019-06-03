@@ -12,7 +12,13 @@ const router 	= express.Router()
 //////////////////////////////
 
 router.get('/', (req, res) => {
-	res.render('index.ejs')
+	if (req.session.currentUser){
+		res.render('index.ejs', {
+			currentUser: req.session.currentUser
+		})
+	} else {
+		res.redirect('http://localhost:3000/users')
+	}
 })
 
 //////////////////////////////
@@ -20,7 +26,13 @@ router.get('/', (req, res) => {
 //////////////////////////////
 
 router.get('/new', (req, res) => {
-	res.render('new.ejs')
+	if (req.session.currentUser){
+		res.render('new.ejs', {
+			currentUser: req.session.currentUser
+		})
+	} else {
+		res.redirect('http://localhost:3000/users')
+	}
 })
 
 //////////////////////////////
@@ -36,7 +48,13 @@ router.post('/', (req, res) => {
 //////////////////////////////
 
 router.get('/:id', (req, res) => {
-	res.render('show.ejs')
+	if (req.session.currentUser){
+		res.render('show.ejs', {
+			currentUser: req.session.currentUser
+		})
+	} else {
+		res.redirect('http://localhost:3000/users')
+	}
 })
 
 //////////////////////////////
@@ -44,7 +62,13 @@ router.get('/:id', (req, res) => {
 //////////////////////////////
 
 router.get('/:id/edit', (req, res) => {
-	res.render('edit.ejs')
+	if (req.session.currentUser){
+		res.render('edit.ejs', {
+			currentUser: req.session.currentUser
+		})
+	} else {
+		res.redirect('http://localhost:3000/users')
+	}
 })
 
 //////////////////////////////

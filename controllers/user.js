@@ -3,6 +3,7 @@
 //////////////////////////////
 
 const express 	= require('express')
+const bcrypt 	= require('bcrypt')
 const User 		= require('../models/user.js')
 
 const router 	= express.Router()
@@ -20,6 +21,7 @@ router.get('/', (req, res) => {
 //////////////////////////////
 
 router.post('/', (req, res) => {
+	req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
 	User.create(req.body, (err, createdUser) => {
 		res.redirect('http://localhost:3000/main')
 	})
@@ -29,9 +31,9 @@ router.post('/', (req, res) => {
 // LOGIN
 //////////////////////////////
 
-router.post('/', (req, res) => {
+router.post('/login', (req, res) => {
 	User.findOne({ username: req.body.username }, (err, foundUser) => {
-		if (req.body.password === foundUser.password) {
+		if ( bcrypt.compareSync(req.body.password, foundUser.password)) {
 			req.session.currentUser = foundUser
 			res.redirect('http://localhost:3000/main')
 		} else {
@@ -62,7 +64,7 @@ router.post('/', (req, res) => {
 
 router.delete('/', (req, res) => {
 	req.session.destroy(() => {
-		res.redirect('/')
+		res.redirect('http://localhost:3000/users')
 	})
 })
 

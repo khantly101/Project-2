@@ -5,5 +5,20 @@
 	</head>
 	<body>
 		<% include ../partials/nav.ejs %>
+		<div class="row container">
+			<div class="col l4 s12">
+				<h4>Enter Data Here</h4>
+				<form action="/users/login" method="POST">
+					Odometer:<input type="text" name="odometer" placeholder="0.000.00">
+					Fuel Type: <input type="text" name="type" placeholder="--">
+					Gallons: <input type="text" name="gallons" placeholder="00.00">
+					Total Cost: <input type="text" name="total" placeholder="$00.00">
+					Cost/Gal: <input type="text" name="pergal" placeholder="$00.00">
+					Date: <input type="text" name="date" placeholder="0/0/00">
+					Location: <input type="text" name="location" placeholder="--">
+					<button type="submit" class="btn waves-effect waves-light">Submit <i class="material-icons right">publish</i></button>
+				</form>
+			</div>
+		</div>
 	</body>
 </html>

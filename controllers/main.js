@@ -3,7 +3,7 @@
 //////////////////////////////
 
 const express 	= require('express')
-const model 	= require('../models/refill.js')
+const User		= require('../models/user.js')
 
 const router 	= express.Router()
 

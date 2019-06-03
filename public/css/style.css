@@ -3,35 +3,49 @@
 /*///////////////////////*/
 
 .sidenav {
-	width: 15vw;
+	width: 80vw;
 }
 
-.gasIconContainer {
-	height: 8.6vh;
-}
+@media (min-width: 993px) {
 
-.gasIcon {
-	margin-left: 2%;
-}
+	.sidenav {
+		width: 15vw;
+	}
 
-.sideNavButtonContainer {
-	margin: 1%;
-}
+	.gasIconContainer {
+		height: 8.6vh;
+	}
 
-.sideNavButton {
-	margin: 1%;
+	.gasIcon {
+		margin-left: 2%;
+	}
+
+	.sideNavButtonContainer {
+		margin: 1%;
+	}
+
+	.sideNavButton {
+		margin: 1%;
+	}
 }
 
 /*/////////////////////////*/
 /*////////LOGIN///////////*/
 /*///////////////////////*/
 
-.login {
-	margin: 0 auto;
-	text-align: center;
-}
+
 
 @media (min-width: 993px){
+
+	.login {
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.wrong {
+		font-size: .8em
+	}
+
 	.middleBar {
 		margin: 0 auto;
 		width: 0px;

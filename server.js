@@ -17,6 +17,7 @@ const port 				= 3000
 //////////////////////////////
 
 mongoose.connect('mongodb://localhost:27017/project-2', {useNewUrlParser: true})
+mongoose.set('useCreateIndex', true)
 mongoose.set('useFindAndModify', false)
 mongoose.connection.once('open', () => {
 	console.log('connected to mongo')

@@ -55,16 +55,16 @@ router.post('/', (req, res) => {
 
 	User.create(req.body, (err, createdUser) => {
 		wrongpass = false
-			console.log(err)
-		if (err.name === "MongoError") {
-			missingText = false
-			usernameInUse = true
-			res.redirect('http://localhost:3000/users')
-		} else if (err.name === "ValidationError") {
-			console.log(err)
-			usernameInUse = false
-			missingText = true
-			res.redirect('http://localhost:3000/users')
+		if (err) {
+			if (err.name === "MongoError") {
+				missingText = false
+				usernameInUse = true
+				res.redirect('http://localhost:3000/users')
+			} else if (err.name === "ValidationError") {
+				usernameInUse = false
+				missingText = true
+				res.redirect('http://localhost:3000/users')
+			}
 		} else {
 			usernameInUse = false
 			missingText = false
@@ -82,16 +82,26 @@ router.post('/login', (req, res) => {
 	usernameInUse = false
 	missingText = false
 
-	User.findOne({ username: req.body.username }, (err, foundUser) => {
-		if ( bcrypt.compareSync(req.body.password, foundUser.password)) {
-			req.session.currentUser = foundUser
-			wrongpass = false
-			res.redirect('http://localhost:3000/main')
-		} else {
-			wrongpass = true
-			res.redirect('http://localhost:3000/users')
-		}
-	})
+	if (req.body.password) {
+		User.findOne({ username: req.body.username }, (err, foundUser) => {
+			if (foundUser) {
+				if ( bcrypt.compareSync(req.body.password, foundUser.password)) {
+					req.session.currentUser = foundUser
+					wrongpass = false
+					res.redirect('http://localhost:3000/main')
+				} else {
+					wrongpass = true
+					res.redirect('http://localhost:3000/users')
+				}
+			} else {
+				wrongpass = true
+				res.redirect('http://localhost:3000/users')
+			}
+		})
+	} else {
+		wrongpass = true
+		res.redirect('http://localhost:3000/users')
+	}
 })
 
 //////////////////////////////

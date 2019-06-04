@@ -3,6 +3,7 @@
 //////////////////////////////
 
 const express 	= require('express')
+const Data		= require('../models/data.js')
 const User		= require('../models/user.js')
 
 const router 	= express.Router()

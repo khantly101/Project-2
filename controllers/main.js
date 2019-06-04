@@ -13,16 +13,19 @@ const router 	= express.Router()
 //////////////////////////////
 
 router.get('/', (req, res) => {
-	if (req.session.currentUser){
-		Data.find({}, (err, allData) => {
+
+	if (req.session.currentUser) {
+		User.findOne({username: req.session.currentUser.username}, (err, userData) => {
+			console.log(userData)
 			res.render('index.ejs', {
 				currentUser: req.session.currentUser,
-				Data: allData
+				Data: userData.data
 			})
-		})
+		}).populate('data')
 	} else {
 		res.redirect('http://localhost:3000/users')
 	}
+
 })
 
 //////////////////////////////
@@ -57,11 +60,17 @@ router.post('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
 	if (req.session.currentUser){
-		Data.findById(req.params.id, (err, foundData) => {
-			res.render('show.ejs', {
-				currentUser: req.session.currentUser,
-				Data: foundData
-			})
+		User.findOne({ username: req.session.currentUser.username }, (err, userData) => {
+			if (userData.data.includes(req.params.id)) {
+				Data.findById(req.params.id, (err, foundData) => {
+					res.render('show.ejs', {
+						currentUser: req.session.currentUser,
+						Data: foundData
+					})
+				})
+			} else {
+				res.redirect('http://localhost:3000/main')
+			}
 		})
 	} else {
 		res.redirect('http://localhost:3000/users')
@@ -101,7 +110,9 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
 	Data.findByIdAndRemove(req.params.id, (err, removed) => {
-		res.redirect('/main')
+		User.update({username: req.session.currentUser.username}, {$pullAll: {data: [req.params.id]}}, (err, updatedData) => {
+			res.redirect('/main')
+		})
 	})
 })
 

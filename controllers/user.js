@@ -4,6 +4,7 @@
 
 const express 	= require('express')
 const bcrypt 	= require('bcrypt')
+const Data		= require('../models/data.js')
 const User 		= require('../models/user.js')
 
 const router 	= express.Router()
@@ -143,18 +144,19 @@ router.post('/:id', (req, res) => {
 
 	if (req.body.password) {
 		if (req.body.newpassword) {
-			newpassword = bcrypt.hashSync(req.body.newpassword, bcrypt.genSaltSync(10))
+			let newpassword = bcrypt.hashSync(req.body.newpassword, bcrypt.genSaltSync(10))
 
 			User.findOne({ username: req.session.currentUser.username }, (err, foundUser) => {
 				if ( bcrypt.compareSync(req.body.password, foundUser.password)) {
-					foundUser.password = newpassword
-					wrongpass = false
-					res.redirect('http://localhost:3000/users/' + foundUser.username)
+					User.findOneAndUpdate({ username: req.session.currentUser.username }, { password: newpassword}, (err, foundUser) => {
+						wrongpass = false
+						res.redirect('http://localhost:3000/main')
+					})
 				} else {
 					wrongpass = true
 					res.redirect('http://localhost:3000/users/' + foundUser.username)
 				}
-			})
+			}) 
 		} else {
 			wrongpass = true
 			res.redirect('http://localhost:3000/users/' + foundUser.username)

@@ -14,8 +14,11 @@ const router 	= express.Router()
 
 router.get('/', (req, res) => {
 	if (req.session.currentUser){
-		res.render('index.ejs', {
-			currentUser: req.session.currentUser
+		Data.find({}, (err, allData) => {
+			res.render('index.ejs', {
+				currentUser: req.session.currentUser,
+				Data: allData
+			})
 		})
 	} else {
 		res.redirect('http://localhost:3000/users')

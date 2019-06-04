@@ -36,10 +36,14 @@ router.get('/', (req, res) => {
 	if (wrongpass === true) {
 		passMessage = "Wrong password"
 	}
+
+	let standin = {username: ""}
+
 	res.render('user.ejs', {
 		PassMessage : passMessage,
 		MissMessage : missMessage,
-		UserMessage : userMessage
+		UserMessage : userMessage, 
+		currentUser : standin
 	})
 })
 
@@ -105,26 +109,71 @@ router.post('/login', (req, res) => {
 })
 
 //////////////////////////////
-// EDIT
+// Profile
 //////////////////////////////
 
-// router.get('/id/edit', (req, res) => {
+router.get('/:id', (req, res) => {
 
-// })
+	let passMessage = "" 
+
+	if (wrongpass === true) {
+		passMessage = "Wrong password"
+	}
+
+	if (req.session.currentUser) {
+		if (req.params.id === req.session.currentUser.username) {
+			res.render('profile.ejs', {
+				currentUser: req.session.currentUser,
+				PassMessage : passMessage
+			})
+		} else {
+			res.redirect('http://localhost:3000/main')
+		}
+	} else {
+		res.redirect('http://localhost:3000/users')
+	}
+
+})
 
 //////////////////////////////
 // UPDATE
 //////////////////////////////
 
-// router.put('/:id', (req, res) => {
+router.post('/:id', (req, res) => {
 
-// })
+	if (req.body.password) {
+		if (req.body.newpassword) {
+			newpassword = bcrypt.hashSync(req.body.newpassword, bcrypt.genSaltSync(10))
+
+			User.findOne({ username: req.session.currentUser.username }, (err, foundUser) => {
+				if ( bcrypt.compareSync(req.body.password, foundUser.password)) {
+					foundUser.password = newpassword
+					wrongpass = false
+					res.redirect('http://localhost:3000/users/' + foundUser.username)
+				} else {
+					wrongpass = true
+					res.redirect('http://localhost:3000/users/' + foundUser.username)
+				}
+			})
+		} else {
+			wrongpass = true
+			res.redirect('http://localhost:3000/users/' + foundUser.username)
+		}
+	} else {
+		wrongpass = true
+		res.redirect('http://localhost:3000/users/' + foundUser.username)
+	}
+})
 
 //////////////////////////////
 // LOG OUT
 //////////////////////////////
 
 router.delete('/', (req, res) => {
+	wrongpass = false
+	usernameInUse = false
+	missingText = false
+
 	req.session.destroy(() => {
 		res.redirect('http://localhost:3000/users')
 	})

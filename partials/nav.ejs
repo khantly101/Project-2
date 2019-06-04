@@ -11,7 +11,7 @@
 				</div>
 				<div class="sideNavButtonContainer">
 					<li class="active sideNavButton"><a href="http://localhost:3000/main"><i class="material-icons">home</i>Home</a></li>
-					<li class="active sideNavButton"><a href="#"><i class="material-icons">account_box</i>Profile</a></li>
+					<li class="active sideNavButton"><a href="http://localhost:3000/users/<%=currentUser.username%>"><i class="material-icons">account_box</i>Profile</a></li>
 					<li class="active sideNavButton"><a href="http://localhost:3000/main/new"><i class="material-icons">add</i>New Data</a></li>
 					<li class="active sideNavButton"><a href="#"><i class="material-icons">map</i>Maps</a></li>
 					<form class="logout" action="/users?_method=DELETE" method="POST">

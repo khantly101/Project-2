@@ -41,7 +41,11 @@ router.get('/new', (req, res) => {
 //////////////////////////////
 
 router.post('/', (req, res) => {
-
+	Data.create(req.body, (err, createdData) => {
+		User.findOneAndUpdate({username: req.session.currentUser.username}, {$push: {data: createdData.id}}, (err, foundUser) => {
+		})
+		res.redirect('http://localhost:3000/main')
+	})
 })
 
 //////////////////////////////

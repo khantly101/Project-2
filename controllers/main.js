@@ -57,8 +57,11 @@ router.post('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
 	if (req.session.currentUser){
-		res.render('show.ejs', {
-			currentUser: req.session.currentUser
+		Data.findById(req.params.id, (err, foundData) => {
+			res.render('show.ejs', {
+				currentUser: req.session.currentUser,
+				Data: foundData
+			})
 		})
 	} else {
 		res.redirect('http://localhost:3000/users')

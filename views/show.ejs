@@ -5,5 +5,25 @@
 	</head>
 	<body>
 		<% include ../partials/nav.ejs %>
+		<table class="container">
+			<tr>
+				<th>Odoneter</th>
+				<th>Fuel Type</th>
+				<th>Gallons</th>
+				<th>Total Cost</th>
+				<th>Cost/Gal</th>
+				<th>Location</th>
+				<th>Dates</th>
+			</tr>
+			<tr>
+				<th><%=Data.odometer%></th>
+				<th><%=Data.type%></th>
+				<th><%=Data.gallons%></th>
+				<th>$<%=Data.total%></th>
+				<th>$<%=Data.pergal%></th>
+				<th><%=Data.location%></th>
+				<th><%=Data.date%></th>
+			</tr>
+		</table>
 	</body>
 </html>

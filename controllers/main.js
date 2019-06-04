@@ -74,8 +74,11 @@ router.get('/:id', (req, res) => {
 
 router.get('/:id/edit', (req, res) => {
 	if (req.session.currentUser){
-		res.render('edit.ejs', {
-			currentUser: req.session.currentUser
+		Data.findById(req.params.id, (err, foundData) => {
+			res.render('edit.ejs', {
+				currentUser: req.session.currentUser,
+				Data: foundData
+			})
 		})
 	} else {
 		res.redirect('http://localhost:3000/users')
@@ -87,7 +90,9 @@ router.get('/:id/edit', (req, res) => {
 //////////////////////////////
 
 router.put('/:id', (req, res) => {
-
+	Data.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updateData) => {
+		res.redirect('http://localhost:3000/main/' + req.params.id)
+	})
 })
 
 //////////////////////////////
@@ -95,7 +100,9 @@ router.put('/:id', (req, res) => {
 //////////////////////////////
 
 router.delete('/:id', (req, res) => {
-	
+	Data.findByIdAndRemove(req.params.id, (err, removed) => {
+		res.redirect('/main')
+	})
 })
 
 module.exports = router

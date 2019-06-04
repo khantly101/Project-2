@@ -5,5 +5,18 @@
 	</head>
 	<body>
 		<% include ../partials/nav.ejs %>
+		<br>
+		<div class="container">
+			<form action="/main/<%=Data.id%>?_method=PUT" method="POST">
+				Odometer: <input type="text" name="odometer" value="<%=Data.odometer%>"/><br/>
+				Fuel Type: <input type="text" name="type" value="<%=Data.type%>"/><br/>
+				Gallons: <input type="text" name="gallons" value="<%=Data.gallons%>"/><br/>
+				Total Cost: <input type="text" name="total" value="<%=Data.total%>"/><br/>
+				Cost/Gal: <input type="text" name="pergal" value="<%=Data.pergal%>"/><br/>
+				Location: <input type="text" name="location" value="<%=Data.location%>"/><br/>
+				Dates: <input type="text" name="date" value="<%=Data.date%>"/><br/>
+				<button type="submit" class="btn waves-effect waves-light left">Submit <i class="material-icons right">publish</i></button>
+			</form>
+		</div>
 	</body>
 </html>

@@ -7,7 +7,7 @@
 		<% include ../partials/nav.ejs %>
 		<table class="container">
 			<tr>
-				<th>Odoneter</th>
+				<th>Odometer</th>
 				<th>Fuel Type</th>
 				<th>Gallons</th>
 				<th>Total Cost</th>
@@ -25,5 +25,15 @@
 				<th><%=Data.date%></th>
 			</tr>
 		</table>
+		<div class="container">
+			<br>
+			<form action="<%=Data.id%>/edit">
+				<button class="btn waves-effect waves-light">Edit<i class="material-icons right">edit</i></button>
+			</form>
+			<br>
+			<form action="<%=Data.id%>?_method=DELETE" method="POST">
+				<button class="btn waves-effect waves-light">Delete<i class="material-icons right">delete</i></button>
+			</form>
+		</div>
 	</body>
 </html>

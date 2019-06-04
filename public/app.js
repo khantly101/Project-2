@@ -10,3 +10,11 @@ const sidebar = () => {
 const logout = () => {
 	$('.logout').submit()
 }
+
+//////////////////////////////
+// Date Select
+//////////////////////////////
+
+$(() => {
+	$('select').formSelect()
+})

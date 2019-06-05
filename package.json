@@ -1,6 +1,9 @@
 {
   "name": "project-2",
   "version": "1.0.0",
+  "engines": {
+    "node": "11.11.0"
+  },
   "description": "Problem:\r -Fuel cost and milage is too unorganized to properly tell how much i am using",
   "main": "server.js",
   "scripts": {

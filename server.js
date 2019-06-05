@@ -17,7 +17,7 @@ const MONGODB_URI		= process.env.MONGODB_URI || 'mongodb://localhost:27017/proje
 // MONGOOSE
 //////////////////////////////
 
-mongoose.connect('mongodb://localhost:27017/project-2', {useNewUrlParser: true})
+mongoose.connect(MONGODB_URI, {useNewUrlParser: true})
 mongoose.set('useCreateIndex', true)
 mongoose.set('useFindAndModify', false)
 mongoose.connection.once('open', () => {

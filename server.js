@@ -10,7 +10,7 @@ const controllerMain 	= require('./controllers/main.js')
 const controllerUser	= require('./controllers/user.js')
 
 const app 				= express()
-const port 				= 3000
+const port 				= process.env.PORT || 3000
 
 //////////////////////////////
 // MONGOOSE

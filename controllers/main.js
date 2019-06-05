@@ -16,7 +16,6 @@ router.get('/', (req, res) => {
 
 	if (req.session.currentUser) {
 		User.findOne({username: req.session.currentUser.username}, (err, userData) => {
-			console.log(userData)
 			res.render('index.ejs', {
 				currentUser: req.session.currentUser,
 				Data: userData.data

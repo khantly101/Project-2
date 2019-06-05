@@ -22,7 +22,11 @@
 				<th>Location</th>
 				<th>Dates</th>
 			</tr>
+			<% let totalCost = 0 %>
 			<% Data.forEach((ele, index) => { %>
+
+				<% totalCost += ele.total %>
+
 				<tr>
 					<th><a href="http://localhost:3000/main/<%=ele.id%>"><%=index%></a></th>
 					<th><%=ele.odometer%></th>
@@ -34,6 +38,18 @@
 					<th><%=ele.date%></th>
 				</tr>
 			<% }) %>
+
+
+			<div class="container">
+				Total Fuel Cost: <br>
+				<%=totalCost%>
+			</div>
+			<div>
+				
+			</div>
+			<div>
+				
+			</div>
 		</table>
 	</body>
 </html>

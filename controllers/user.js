@@ -86,24 +86,30 @@ router.post('/login', (req, res) => {
 
 	usernameInUse = false
 	missingText = false
-
+	console.log("point1")
 	if (req.body.password) {
+		console.log("point2")
 		User.findOne({ username: req.body.username }, (err, foundUser) => {
+			console.log("point3")
 			if (foundUser) {
 				if ( bcrypt.compareSync(req.body.password, foundUser.password)) {
 					req.session.currentUser = foundUser
 					wrongpass = false
+					console.log("point4")
 					res.redirect('https://secure-fortress-80109.herokuapp.com/main')
 				} else {
+					console.log("point5")
 					wrongpass = true
 					res.redirect('https://secure-fortress-80109.herokuapp.com/users')
 				}
 			} else {
+				console.log("point6")
 				wrongpass = true
 				res.redirect('https://secure-fortress-80109.herokuapp.com/users')
 			}
 		})
 	} else {
+		console.log("point7")
 		wrongpass = true
 		res.redirect('https://secure-fortress-80109.herokuapp.com/users')
 	}

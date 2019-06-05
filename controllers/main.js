@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 			})
 		}).populate('data')
 	} else {
-		res.redirect('http://localhost:3000/users')
+		res.redirect('https://secure-fortress-80109.herokuapp.com/users')
 	}
 
 })
@@ -37,7 +37,7 @@ router.get('/new', (req, res) => {
 			currentUser: req.session.currentUser
 		})
 	} else {
-		res.redirect('http://localhost:3000/users')
+		res.redirect('https://secure-fortress-80109.herokuapp.com/users')
 	}
 })
 
@@ -49,7 +49,7 @@ router.post('/', (req, res) => {
 	Data.create(req.body, (err, createdData) => {
 		User.findOneAndUpdate({username: req.session.currentUser.username}, {$push: {data: createdData.id}}, (err, foundUser) => {
 		})
-		res.redirect('http://localhost:3000/main')
+		res.redirect('https://secure-fortress-80109.herokuapp.com/main')
 	})
 })
 
@@ -68,11 +68,11 @@ router.get('/:id', (req, res) => {
 					})
 				})
 			} else {
-				res.redirect('http://localhost:3000/main')
+				res.redirect('https://secure-fortress-80109.herokuapp.com/main')
 			}
 		})
 	} else {
-		res.redirect('http://localhost:3000/users')
+		res.redirect('https://secure-fortress-80109.herokuapp.com/users')
 	}
 })
 
@@ -89,7 +89,7 @@ router.get('/:id/edit', (req, res) => {
 			})
 		})
 	} else {
-		res.redirect('http://localhost:3000/users')
+		res.redirect('https://secure-fortress-80109.herokuapp.com/users')
 	}
 })
 
@@ -99,7 +99,7 @@ router.get('/:id/edit', (req, res) => {
 
 router.put('/:id', (req, res) => {
 	Data.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updateData) => {
-		res.redirect('http://localhost:3000/main/' + req.params.id)
+		res.redirect('https://secure-fortress-80109.herokuapp.com/main/' + req.params.id)
 	})
 })
 

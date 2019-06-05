@@ -64,16 +64,16 @@ router.post('/', (req, res) => {
 			if (err.name === "MongoError") {
 				missingText = false
 				usernameInUse = true
-				res.redirect('http://localhost:3000/users')
+				res.redirect('https://secure-fortress-80109.herokuapp.com/users')
 			} else if (err.name === "ValidationError") {
 				usernameInUse = false
 				missingText = true
-				res.redirect('http://localhost:3000/users')
+				res.redirect('https://secure-fortress-80109.herokuapp.com/users')
 			}
 		} else {
 			usernameInUse = false
 			missingText = false
-			res.redirect('http://localhost:3000/users')
+			res.redirect('https://secure-fortress-80109.herokuapp.com/users')
 		}
 	})
 })
@@ -93,19 +93,19 @@ router.post('/login', (req, res) => {
 				if ( bcrypt.compareSync(req.body.password, foundUser.password)) {
 					req.session.currentUser = foundUser
 					wrongpass = false
-					res.redirect('http://localhost:3000/main')
+					res.redirect('https://secure-fortress-80109.herokuapp.com/main')
 				} else {
 					wrongpass = true
-					res.redirect('http://localhost:3000/users')
+					res.redirect('https://secure-fortress-80109.herokuapp.com/users')
 				}
 			} else {
 				wrongpass = true
-				res.redirect('http://localhost:3000/users')
+				res.redirect('https://secure-fortress-80109.herokuapp.com/users')
 			}
 		})
 	} else {
 		wrongpass = true
-		res.redirect('http://localhost:3000/users')
+		res.redirect('https://secure-fortress-80109.herokuapp.com/users')
 	}
 })
 
@@ -128,10 +128,10 @@ router.get('/:id', (req, res) => {
 				PassMessage : passMessage
 			})
 		} else {
-			res.redirect('http://localhost:3000/main')
+			res.redirect('https://secure-fortress-80109.herokuapp.com/main')
 		}
 	} else {
-		res.redirect('http://localhost:3000/users')
+		res.redirect('https://secure-fortress-80109.herokuapp.com/users')
 	}
 
 })
@@ -150,20 +150,20 @@ router.post('/:id', (req, res) => {
 				if ( bcrypt.compareSync(req.body.password, foundUser.password)) {
 					User.findOneAndUpdate({ username: req.session.currentUser.username }, { password: newpassword}, (err, foundUser) => {
 						wrongpass = false
-						res.redirect('http://localhost:3000/main')
+						res.redirect('https://secure-fortress-80109.herokuapp.com/main')
 					})
 				} else {
 					wrongpass = true
-					res.redirect('http://localhost:3000/users/' + foundUser.username)
+					res.redirect('https://secure-fortress-80109.herokuapp.com/users/' + foundUser.username)
 				}
 			}) 
 		} else {
 			wrongpass = true
-			res.redirect('http://localhost:3000/users/' + foundUser.username)
+			res.redirect('https://secure-fortress-80109.herokuapp.com/users/' + foundUser.username)
 		}
 	} else {
 		wrongpass = true
-		res.redirect('http://localhost:3000/users/' + foundUser.username)
+		res.redirect('https://secure-fortress-80109.herokuapp.com/users/' + foundUser.username)
 	}
 })
 
@@ -177,7 +177,7 @@ router.delete('/', (req, res) => {
 	missingText = false
 
 	req.session.destroy(() => {
-		res.redirect('http://localhost:3000/users')
+		res.redirect('https://secure-fortress-80109.herokuapp.com/users')
 	})
 })
 

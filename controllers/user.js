@@ -94,22 +94,22 @@ router.post('/login', (req, res) => {
 				console.log(err)
 			}
 			console.log("point3")
-			if (foundUser) {
-				if ( bcrypt.compareSync(req.body.password, foundUser.password)) {
-					req.session.currentUser = foundUser
-					wrongpass = false
-					console.log("point4")
-					res.redirect('../main')
-				} else {
-					console.log("point5")
-					wrongpass = true
-					res.redirect('/')
-				}
-			} else {
-				console.log("point6")
-				wrongpass = true
-				res.redirect('/')
-			}
+		// 	if (foundUser) {
+		// 		if ( bcrypt.compareSync(req.body.password, foundUser.password)) {
+		// 			req.session.currentUser = foundUser
+		// 			wrongpass = false
+		// 			console.log("point4")
+		// 			res.redirect('../main')
+		// 		} else {
+		// 			console.log("point5")
+		// 			wrongpass = true
+		// 			res.redirect('/')
+		// 		}
+		// 	} else {
+		// 		console.log("point6")
+		// 		wrongpass = true
+		// 		res.redirect('/')
+		// 	}
 		})
 	} else {
 		console.log("point7")

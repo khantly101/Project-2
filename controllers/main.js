@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 			})
 		}).populate('data')
 	} else {
-		res.redirect('https://secure-fortress-80109.herokuapp.com/users')
+		res.redirect('../users')
 	}
 
 })
@@ -37,7 +37,7 @@ router.get('/new', (req, res) => {
 			currentUser: req.session.currentUser
 		})
 	} else {
-		res.redirect('https://secure-fortress-80109.herokuapp.com/users')
+		res.redirect('../users')
 	}
 })
 
@@ -49,7 +49,7 @@ router.post('/', (req, res) => {
 	Data.create(req.body, (err, createdData) => {
 		User.findOneAndUpdate({username: req.session.currentUser.username}, {$push: {data: createdData.id}}, (err, foundUser) => {
 		})
-		res.redirect('https://secure-fortress-80109.herokuapp.com/main')
+		res.redirect('/')
 	})
 })
 
@@ -68,11 +68,11 @@ router.get('/:id', (req, res) => {
 					})
 				})
 			} else {
-				res.redirect('https://secure-fortress-80109.herokuapp.com/main')
+				res.redirect('/')
 			}
 		})
 	} else {
-		res.redirect('https://secure-fortress-80109.herokuapp.com/users')
+		res.redirect('../users')
 	}
 })
 
@@ -89,7 +89,7 @@ router.get('/:id/edit', (req, res) => {
 			})
 		})
 	} else {
-		res.redirect('https://secure-fortress-80109.herokuapp.com/users')
+		res.redirect('../users')
 	}
 })
 
@@ -99,7 +99,7 @@ router.get('/:id/edit', (req, res) => {
 
 router.put('/:id', (req, res) => {
 	Data.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updateData) => {
-		res.redirect('https://secure-fortress-80109.herokuapp.com/main/' + req.params.id)
+		res.redirect('/' + req.params.id)
 	})
 })
 
@@ -110,7 +110,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
 	Data.findByIdAndRemove(req.params.id, (err, removed) => {
 		User.update({username: req.session.currentUser.username}, {$pullAll: {data: [req.params.id]}}, (err, updatedData) => {
-			res.redirect('/main')
+			res.redirect('/')
 		})
 	})
 })

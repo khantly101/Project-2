@@ -90,26 +90,24 @@ router.post('/login', (req, res) => {
 	if (req.body.password) {
 		console.log("point2")
 		User.findOne({ username: req.body.username }, (err, foundUser) => {
-			if (err) {
-				console.log(err)
-			}
 			console.log("point3")
-		// 	if (foundUser) {
-		// 		if ( bcrypt.compareSync(req.body.password, foundUser.password)) {
-		// 			req.session.currentUser = foundUser
-		// 			wrongpass = false
-		// 			console.log("point4")
-		// 			res.redirect('../main')
-		// 		} else {
-		// 			console.log("point5")
-		// 			wrongpass = true
-		// 			res.redirect('/')
-		// 		}
-		// 	} else {
-		// 		console.log("point6")
-		// 		wrongpass = true
-		// 		res.redirect('/')
-		// 	}
+			if (foundUser) {
+				console.log(foundUser)
+				if ( bcrypt.compareSync(req.body.password, foundUser.password)) {
+					req.session.currentUser = foundUser
+					wrongpass = false
+					console.log("point4")
+					res.redirect('../main')
+				} else {
+					console.log("point5")
+					wrongpass = true
+					res.redirect('/')
+				}
+			} else {
+				console.log("point6")
+				wrongpass = true
+				res.redirect('/')
+			}
 		})
 	} else {
 		console.log("point7")

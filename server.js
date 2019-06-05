@@ -11,7 +11,7 @@ const controllerUser	= require('./controllers/user.js')
 
 const app 				= express()
 const port 				= process.env.PORT || 3000
-const mongoURI			= process.env.MONGODB_URI || 'mongodb://localhost/'+ `tracker`
+const mongoURI			= process.env.MONGODB_URI || 'mongodb://localhost:27017/project-2'
 
 //////////////////////////////
 // MONGOOSE

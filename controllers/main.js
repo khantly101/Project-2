@@ -16,9 +16,51 @@ router.get('/', (req, res) => {
 
 	if (req.session.currentUser) {
 		User.findOne({username: req.session.currentUser.username}, (err, userData) => {
+
+			let totalCost = 0
+			let totalGal = 0
+			let bestMpg = 0
+			let lastMpg = 0
+			let chartData = [{"Type" : "Low", "presses": 0}, {"Type" : "Regular", "presses" : 0}, {"Type" : "Mid", "presses" : 0}, {"Type" : "High", "presses" : 0}, {"Type" : "Premium", "presses" : 0}, {"Type" : "Super Premium", "presses" : 0}]
+
+			userData.data.forEach((ele, index) => {
+				let milesPerGal = 0
+				totalCost += ele.total
+				totalGal += ele.gallons
+
+				if (index !== 0) {
+					milesPerGal = (userData.data[index].odometer - userData.data[index - 1].odometer)/userData.data[index-1].gallons
+					lastMpg = (userData.data[index].odometer - userData.data[index - 1].odometer)/userData.data[index-1].gallons
+				}
+
+				if (milesPerGal > bestMpg) {
+					 bestMpg = milesPerGal
+				}
+
+				if (ele.type === "Low") {
+					chartData[0].presses += 1
+				} else if (ele.type === "Regular") {
+					chartData[1].presses += 1
+				} else if (ele.type === "Mid") {
+					chartData[2].presses += 1
+				} else if (ele.type === "High") {
+					chartData[3].presses += 1
+				} else if (ele.type === "Premium") {
+					chartData[4].presses += 1
+				} else if (ele.type === "Super Premium") {
+					chartData[5].presses += 1
+				}
+			})
+
+			console.log(chartData)
 			res.render('index.ejs', {
 				currentUser: req.session.currentUser,
-				Data: userData.data
+				Data: userData.data,
+				totalCost: totalCost,
+				totalGal: totalGal,
+				bestMpg: bestMpg,
+				lastMpg: lastMpg,
+				chartData: chartData,
 			})
 		}).populate('data')
 	} else {
@@ -99,7 +141,7 @@ router.get('/:id/edit', (req, res) => {
 
 router.put('/:id', (req, res) => {
 	Data.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updateData) => {
-		res.redirect('/' + req.params.id)
+		res.redirect('/main/' + req.params.id)
 	})
 })
 

@@ -32,7 +32,17 @@
 				<h4>Enter Data Here</h4>
 				<form action="/main" method="POST">
 					Odometer:<input type="text" name="odometer" placeholder="0.000.00">
-					Fuel Type: <input type="text" name="type" placeholder="--">
+					Fuel Type: 					
+						<div class="input-field col s12">
+							<select name="type">
+								<option value="Low">Low</option>
+								<option value="Regular">Regular</option>
+								<option value="Mid">Mid</option>
+								<option value="High">High</option>
+								<option value="Premium">Premium</option>
+								<option value="Super Premium">Super Premium</option>
+							</select>
+						</div><br>
 					Gallons: <input type="text" name="gallons" placeholder="00.00">
 					Total Cost: <input type="text" name="total" placeholder="$00.00">
 					Cost/Gal: <input type="text" name="pergal" placeholder="$00.00">

@@ -90,7 +90,6 @@ router.post('/login', (req, res) => {
 	if (req.body.password) {
 		User.findOne({ username: req.body.username }, (err, foundUser) => {
 			if (foundUser) {
-				console.log(foundUser)
 				if ( bcrypt.compareSync(req.body.password, foundUser.password)) {
 					req.session.currentUser = foundUser
 					wrongpass = false

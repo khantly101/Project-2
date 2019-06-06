@@ -36,6 +36,7 @@
 		</h1>
 		<table class="container">
 			<tr>
+				<th>Index</th>
 				<th>Odometer</th>
 				<th>Fuel Type</th>
 				<th>Gallons</th>
@@ -43,11 +44,15 @@
 				<th>Cost/Gal</th>
 				<th>Location</th>
 				<th>Dates</th>
+				<th>Miles Per Gallon</th>
 			</tr>
-			<% let totalCost = 0 %>
-			<% Data.forEach((ele, index) => { %>
 
-				<% totalCost += ele.total %>
+			<% Data.forEach((ele, index) => { %>
+				<% let milesPerGal = 0 %>
+
+				<% if (index !== 0) { %>
+					<% milesPerGal = (Data[index].odometer - Data[index - 1].odometer)/Data[index-1].gallons %>
+				<% } %>
 
 				<tr>
 					<th><a href="main/<%=ele.id%>"><%=index%></a></th>
@@ -58,6 +63,7 @@
 					<th>$<%=ele.pergal%></th>
 					<th><%=ele.location%></th>
 					<th><%=ele.date%></th>
+					<th><%=milesPerGal%></th>
 				</tr>
 			<% }) %>
 
@@ -66,12 +72,27 @@
 				Total Fuel Cost: <br>
 				<%=totalCost%>
 			</div>
-			<div>
-				
+			<div class="container">
+				Total Gallons: <br>
+				<%=totalGal%>
 			</div>
-			<div>
-				
+			<div class="container">
+				Total Miles: <br>
+				<%=Data[Data.length - 1].odometer-Data[0].odometer%>
 			</div>
+			<div class="container">
+				Best Miles Per Gallon: <br>
+				<%=bestMpg%>
+			</div>
+			<div class="container">
+				Last Miles Per Gallon: <br>
+				<%=lastMpg%>
+			</div>
+
+			<div id="pie"></div>
+			<script type="text/javascript">
+				pieChart(<%-JSON.stringify(chartData)%>)
+			</script>
 		</table>
 	</body>
 </html>

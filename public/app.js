@@ -36,30 +36,27 @@ const pieChart = (chartData) => {
 
 	let arc = d3.arc().outerRadius(radius - 10).innerRadius(100)
 
-	let svg = d3.select("#pie").append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width/2 + "," + height/2 +")")
+	let svg = d3.select("#pie").append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width/2 + "," + height/2 +")")	
 	let g = svg.selectAll("arc").data(pie).enter().append("g").attr("class", "arc")
 
 	svg.append("svg:circle")
    		.attr("cx", 0)
     	.attr("cy", 0)
     	.attr("r", radius /2)
+    	.attr("class", "middle")
     	.style("fill", "grey")
-    	.append("div")
-    	.attr("class", "tooltip")
 
 	g.append("path").attr("d", arc).style("fill", (d) => {
 		return color(d.data.Type)
 	})
 
-	let tooltip = d3.select(".tooltip")
-
-	tooltip.append("div").attr("class", "Type")
-	tooltip.append("div").attr("class", "count")
+	
 
 	g.on("mouseover", (d) => {
-		tooltip.select('.Type').html(d.data.Type)
-		tooltip.select(".count").html(d.data.presses)
-		tooltip.style("display", "block")
+		svg.append("text").attr("text-anchor", "middle").attr("class", "donut").text(d.data.Type)
+		svg.append("text").attr("text-anchor", "middle").attr("class", "donut").text(d.data.presses).attr('y', height * 0.1)
+	}).on("mouseout", (d) => {
+		svg.selectAll(".donut").remove()
 	})
 }
 

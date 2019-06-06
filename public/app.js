@@ -34,7 +34,7 @@ const pieChart = (chartData) => {
 		return d.presses
 	})(chartData)
 
-	let arc = d3.arc().outerRadius(radius - 10).innerRadius(100)
+	let arc = d3.arc().outerRadius(radius - 20).innerRadius(90)
 
 	let svg = d3.select("#pie").append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width/2 + "," + height/2 +")")	
 	let g = svg.selectAll("arc").data(pie).enter().append("g").attr("class", "arc")
@@ -60,10 +60,22 @@ const pieChart = (chartData) => {
 	})
 }
 
+const lineChart = (chartData) => {
+	let width = 1000
+	let height = 500
+
+	let vis = d3.select("#line").append("svg").attr("width", width).attr("height", height)
+
+	let xScale = d3.scaleLinear().domain([0, 20]).range([2, 400])
+	let xAxis = d3.axisBottom().scale(xScale)
+	let x = vis.append("g").call(xAxis)
+}
+
 //////////////////////////////
 // Document Ready
 //////////////////////////////
 
 $(() => {
+	lineChart()
 	selectDrop()
 })

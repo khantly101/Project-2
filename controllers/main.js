@@ -52,7 +52,6 @@ router.get('/', (req, res) => {
 				}
 			})
 
-			console.log(chartData)
 			res.render('index.ejs', {
 				currentUser: req.session.currentUser,
 				Data: userData.data,

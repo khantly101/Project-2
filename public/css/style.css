@@ -55,6 +55,22 @@
 }
 
 /*/////////////////////////*/
-/*////////TOOLTIP///////////*/
+/*////////PIE CHART///////*/
 /*///////////////////////*/
 
+path{
+	stroke: teal;
+	fill: none;
+	stroke-width: 2;
+}
+
+line {
+	stroke: teal;
+}
+
+.arc { 
+	transition: all .4s ease-in-out; 
+}
+.arc:hover { 
+	transform: scale(1.05);
+}

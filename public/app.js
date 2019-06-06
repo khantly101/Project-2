@@ -66,9 +66,16 @@ const lineChart = (chartData) => {
 
 	let vis = d3.select("#line").append("svg").attr("width", width).attr("height", height)
 
-	let xScale = d3.scaleLinear().domain([0, 20]).range([2, 400])
-	let xAxis = d3.axisBottom().scale(xScale)
-	let x = vis.append("g").call(xAxis)
+	let xScale = d3.scaleLinear().domain([0, 10]).range([0, 400])
+	let xAxis = d3.axisBottom().scale(xScale).ticks(5)
+	let x = vis.append("g").attr("transform", "translate(50,210)").call(xAxis)
+
+	let yScale = d3.scaleLinear().domain([10, 0]).range([0, 200])
+	let yAxis = d3.axisLeft().scale(yScale).ticks(5)
+	let y = vis.append("g").attr("transform", "translate(50,10)").call(yAxis)
+
+	vis.append("circle").attr("cx", xScale(10) + 50).attr("cy", yScale(5)).attr("r", 8)
+
 }
 
 //////////////////////////////

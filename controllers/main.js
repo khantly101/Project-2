@@ -22,6 +22,7 @@ router.get('/', (req, res) => {
 			let bestMpg = 0
 			let lastMpg = 0
 			let chartData = [{"Type" : "Low", "presses": 0}, {"Type" : "Regular", "presses" : 0}, {"Type" : "Mid", "presses" : 0}, {"Type" : "High", "presses" : 0}, {"Type" : "Premium", "presses" : 0}, {"Type" : "Super Premium", "presses" : 0}]
+			let lineData = [{"x" : 0, "y" : 0}]
 
 			userData.data.forEach((ele, index) => {
 				let milesPerGal = 0
@@ -30,6 +31,7 @@ router.get('/', (req, res) => {
 
 				if (index !== 0) {
 					milesPerGal = (userData.data[index].odometer - userData.data[index - 1].odometer)/userData.data[index-1].gallons
+					lineData.push({"x" : index, "y" : Math.floor(milesPerGal)})
 					lastMpg = (userData.data[index].odometer - userData.data[index - 1].odometer)/userData.data[index-1].gallons
 				}
 
@@ -60,6 +62,7 @@ router.get('/', (req, res) => {
 				bestMpg: bestMpg,
 				lastMpg: lastMpg,
 				chartData: chartData,
+				lineData: lineData
 			})
 		}).populate('data')
 	} else {

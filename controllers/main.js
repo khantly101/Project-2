@@ -23,7 +23,6 @@ router.get('/', (req, res) => {
 			let totalGal = 0
 			let bestMpg = 0
 			let lastMpg = 0
-			let chartData = [{"Type" : "Low", "presses": 0}, {"Type" : "Regular", "presses" : 0}, {"Type" : "Mid", "presses" : 0}, {"Type" : "High", "presses" : 0}, {"Type" : "Premium", "presses" : 0}, {"Type" : "Super Premium", "presses" : 0}]
 			let lineData = [{"x" : 0, "y" : 0}]
 			let brandData = [{"Brand" : "Shell", "presses": 0}, {"Brand" : "Chevron", "presses": 0}, {"Brand" : "Valero", "presses": 0}, {"Brand" : "Texaco", "presses": 0}, {"Brand" : "ARCO", "presses": 0}, {"Brand" : "76", "presses": 0}]
 
@@ -48,20 +47,6 @@ router.get('/', (req, res) => {
 				if (milesPerGal > bestMpg) {
 					 bestMpg = milesPerGal
 				}
-
-				if (ele.type === "Low") {
-					chartData[0].presses += 1
-				} else if (ele.type === "Regular") {
-					chartData[1].presses += 1
-				} else if (ele.type === "Mid") {
-					chartData[2].presses += 1
-				} else if (ele.type === "High") {
-					chartData[3].presses += 1
-				} else if (ele.type === "Premium") {
-					chartData[4].presses += 1
-				} else if (ele.type === "Super Premium") {
-					chartData[5].presses += 1
-				}
 			})
 
 			if (userData.data[userData.data.length - 1]) {
@@ -83,7 +68,6 @@ router.get('/', (req, res) => {
 				totalGal: Math.floor(totalGal),
 				bestMpg: Math.round(bestMpg * 100) / 100,
 				lastMpg: Math.round(lastMpg * 100) / 100,
-				chartData: chartData,
 				lineData: lineData,
 				brandData: brandData,
 				avgMpg: Math.round(avgMpg * 100) / 100,

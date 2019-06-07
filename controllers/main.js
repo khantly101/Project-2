@@ -17,6 +17,8 @@ router.get('/', (req, res) => {
 	if (req.session.currentUser) {
 		User.findOne({username: req.session.currentUser.username}, (err, userData) => {
 
+			let avgMpg = 0
+			let avgPMile = 0
 			let totalCost = 0
 			let totalGal = 0
 			let bestMpg = 0
@@ -61,7 +63,7 @@ router.get('/', (req, res) => {
 					chartData[5].presses += 1
 				}
 			})
-			
+
 			if (userData.data[userData.data.length - 1]) {
 				let avgMpg = (userData.data[userData.data.length - 1].odometer - userData.data[0].odometer) / totalGal
 				let avgPMile = totalCost / (userData.data[userData.data.length - 1].odometer - userData.data[0].odometer)

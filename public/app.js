@@ -135,26 +135,26 @@ const brandChart = (chartData) => {
 
 
 const lineChart = (chartData) => {
-	let width = 600
-	let height = 300
+	let width = 1000
+	let height = 500
 
 	let vis = d3.select("#line")
 				.append("svg")
 				.attr("width", width)
 				.attr("height", height)
 
-	let xScale = d3.scaleLinear().domain([0, 10]).range([0, 400])
+	let xScale = d3.scaleLinear().domain([0, 10]).range([0, 1000])
 	let xAxis = d3.axisBottom().scale(xScale)
-	let x = vis.append("g").attr("class", "x axis").attr("transform", "translate(25,210)").call(xAxis)
+	let x = vis.append("g").attr("class", "x axis").attr("transform", "translate(25,470)").call(xAxis)
 
-	let yScale = d3.scaleLinear().domain([40, 0]).range([0, 200])
+	let yScale = d3.scaleLinear().domain([40, 0]).range([0, 500])
 	let yAxis = d3.axisLeft().scale(yScale)
-	let y = vis.append("g").attr("class", "y axis").attr("transform", "translate(25,10)").call(yAxis)
+	let y = vis.append("g").attr("class", "y axis").attr("transform", "translate(25, -30)").call(yAxis)
 
 	let line = d3.line().x((d,i) => {
 		return xScale(i) + 25
 	}).y((d) => {
-		return yScale(d.y) + 10
+		return yScale(d.y) - 30
 	}).curve(d3.curveMonotoneX)
 
 	vis.append("path")
@@ -171,7 +171,7 @@ const lineChart = (chartData) => {
 			return xScale(i) + 25
 		})
 		.attr("cy", (d) => {
-			return yScale(d.y) + 10
+			return yScale(d.y) - 30
 		})
 		.attr("r", 4)
 

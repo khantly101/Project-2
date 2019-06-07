@@ -28,15 +28,15 @@
 			</ul>
 		</nav>
 		<div class="row center container">
-			<div class="container info col s6 m2 l2 hoverable">
+			<div class="container info col s6 m6 l2 hoverable">
 				Total Fuel Cost: <br>
 				$<%=totalCost%>
 			</div>
-			<div class="container info col s6 m2 l2 hoverable">
+			<div class="container info col s6 m6 l2 hoverable">
 				Total Gallons: <br>
 				<%=totalGal%>
 			</div>
-			<div class="container info col s6 m2 l2 hoverable">
+			<div class="container info col s6 m6 l2 hoverable">
 				Total Miles: <br>
 				<% if (Data.length > 1) { %>
 					<%=Data[Data.length - 1].odometer - Data[0].odometer%>
@@ -44,15 +44,15 @@
 					Not Enough Data
 				<% } %>
 			</div>
-			<div class="container info col s6 m2 l2 hoverable">
+			<div class="container info col s6 m6 l2 hoverable">
 				Best MPG: <br>
 				<%=bestMpg%>
 			</div>
-			<div class="container info col s6 m2 l2 hoverable">
+			<div class="container info col s6 m6 l2 hoverable">
 				Last MPG: <br>
 				<%=lastMpg%>
 			</div>
-			<div class="container info col s6 m2 l2 hoverable">
+			<div class="container info col s6 m6 l2 hoverable">
 				Fuel logs: <br>
 				<%=totalLogs%>
 			</div>
@@ -95,19 +95,19 @@
 			</table>
 		</div>
 		<div class="row center container">
-			<div class="container info col s6 m3 l3 hoverable">
+			<div class="container info col s6 m6 l3 hoverable">
 				Avg MPG: <br>
 				<%=avgMpg%>
 			</div>
-			<div class="container info col s6 m3 l3 hoverable">
+			<div class="container info col s6 m6 l3 hoverable">
 				Avg Price/Gal: <br>
 				$<%=avgPrice%>
 			</div>
-			<div class="container info col s6 m3 l3 hoverable">
+			<div class="container info col s6 m6 l3 hoverable">
 				Avg Fuel Up Cost: <br>
 				$<%=avgFuelup%>
 			</div>
-			<div class="container info col s6 m3 l3 hoverable">
+			<div class="container info col s6 m6 l3 hoverable">
 				Avg Price/Mile: <br>
 				$<%=avgPMile%>
 			</div>

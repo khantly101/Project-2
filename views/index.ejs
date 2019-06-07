@@ -78,7 +78,11 @@
 			</div>
 			<div class="container">
 				Total Miles: <br>
-				<%=Data[Data.length - 1].odometer - Data[0].odometer%>
+				if (Data.lenth > 1) {
+					<%=Data[Data.length - 1].odometer - Data[0].odometer%>
+				} else {
+					Not Enough Data
+				}
 			</div>
 			<div class="container">
 				Best Miles Per Gallon: <br>

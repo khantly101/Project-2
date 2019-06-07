@@ -42,6 +42,20 @@
 							<option value="Super Premium">Super Premium</option>
 						</select>
 					</div><br>
+				Brand: 
+					<div class="input-field col s12">
+						<select name="brand">
+							<option value="Shell">Shell</option>
+							<option value="Chevron">Chevron</option>
+							<option value="Valero">Valero</option>
+							<option value="Texaco">Texaco</option>
+							<option value="ARCO">ARCO</option>
+							<option value="76">76</option>
+							<% Brands.forEach((ele) => { %>
+								<option value="<%=ele%>"><%=ele%></option>
+							<% }) %>
+						</select>
+					</div><br>
 				Gallons: <input type="text" name="gallons" value="<%=Data.gallons%>"/><br/>
 				Total Cost: <input type="text" name="total" value="<%=Data.total%>"/><br/>
 				Cost/Gal: <input type="text" name="pergal" value="<%=Data.pergal%>"/><br/>

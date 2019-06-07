@@ -4,6 +4,7 @@ const Schema 	= mongoose.Schema
 const DataSchema = Schema({
 	odometer	:	Number,
 	type		:	String,
+	brand		:	String,
 	gallons		:	Number,
 	total		:	Number,
 	pergal		:	Number,

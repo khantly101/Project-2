@@ -45,6 +45,7 @@
 				<th>Location</th>
 				<th>Dates</th>
 				<th>Miles Per Gallon</th>
+				<th>Brand</th>
 			</tr>
 
 			<% Data.forEach((ele, index) => { %>
@@ -64,6 +65,7 @@
 					<th><%=ele.location%></th>
 					<th><%=ele.date%></th>
 					<th><%=milesPerGal%></th>
+					<th><%=ele.brand%></th>
 				</tr>
 			<% }) %>
 
@@ -95,9 +97,11 @@
 
 			<div id="pie"></div>
 			<div id="line"></div>
+			<div id="brand"></div>
 			<script type="text/javascript">
 				pieChart(<%-JSON.stringify(chartData)%>)
 				lineChart(<%-JSON.stringify(lineData)%>)
+				brandChart(<%-JSON.stringify(brandData)%>)
 			</script>
 		</table>
 	</body>

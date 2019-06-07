@@ -140,6 +140,12 @@ router.get('/:id', (req, res) => {
 // UPDATE
 //////////////////////////////
 
+router.post('/Newbrand', (req, res) => {
+	User.findOneAndUpdate({ username: req.session.currentUser.username }, { $push: {userBrands: req.body.userBrands}}, (err, foundUser) => {
+		res.redirect('../main')
+	})
+})
+
 router.post('/:id', (req, res) => {
 
 	if (req.body.password) {
@@ -166,6 +172,7 @@ router.post('/:id', (req, res) => {
 		res.redirect('/' + foundUser.username)
 	}
 })
+
 
 //////////////////////////////
 // LOG OUT

@@ -23,11 +23,21 @@ router.get('/', (req, res) => {
 			let lastMpg = 0
 			let chartData = [{"Type" : "Low", "presses": 0}, {"Type" : "Regular", "presses" : 0}, {"Type" : "Mid", "presses" : 0}, {"Type" : "High", "presses" : 0}, {"Type" : "Premium", "presses" : 0}, {"Type" : "Super Premium", "presses" : 0}]
 			let lineData = [{"x" : 0, "y" : 0}]
+			let brandData = [{"Brand" : "Shell", "presses": 0}, {"Brand" : "Chevron", "presses": 0}, {"Brand" : "Valero", "presses": 0}, {"Brand" : "Texaco", "presses": 0}, {"Brand" : "ARCO", "presses": 0}, {"Brand" : "76", "presses": 0}]
 
 			userData.data.forEach((ele, index) => {
 				let milesPerGal = 0
 				totalCost += ele.total
 				totalGal += ele.gallons
+
+				let brandInd = brandData.findIndex((elem) => {return elem.Brand === ele.brand})
+				console.log(brandInd)
+				if (brandInd !== -1) {
+					brandData[brandInd].presses += 1
+				} else {
+					brandData.push({"Brand" : ele.brand , "presses" : 1})
+				}
+				console.log(brandData)
 
 				if (index !== 0) {
 					milesPerGal = (userData.data[index].odometer - userData.data[index - 1].odometer)/userData.data[index-1].gallons
@@ -62,7 +72,8 @@ router.get('/', (req, res) => {
 				bestMpg: bestMpg,
 				lastMpg: lastMpg,
 				chartData: chartData,
-				lineData: lineData
+				lineData: lineData,
+				brandData: brandData
 			})
 		}).populate('data')
 	} else {
@@ -77,8 +88,11 @@ router.get('/', (req, res) => {
 
 router.get('/new', (req, res) => {
 	if (req.session.currentUser){
-		res.render('new.ejs', {
-			currentUser: req.session.currentUser
+		User.findOne({ username: req.session.currentUser.username }, (err, userData) => {
+			res.render('new.ejs', {
+				currentUser: req.session.currentUser,
+				Brands: userData.userBrands
+			})
 		})
 	} else {
 		res.redirect('../users')
@@ -127,9 +141,12 @@ router.get('/:id', (req, res) => {
 router.get('/:id/edit', (req, res) => {
 	if (req.session.currentUser){
 		Data.findById(req.params.id, (err, foundData) => {
-			res.render('edit.ejs', {
-				currentUser: req.session.currentUser,
-				Data: foundData
+			User.findOne({ username: req.session.currentUser.username }, (err, userData) => {
+				res.render('edit.ejs', {
+					currentUser: req.session.currentUser,
+					Brands: userData.userBrands,
+					Data: foundData
+				})
 			})
 		})
 	} else {

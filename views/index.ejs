@@ -28,15 +28,15 @@
 			</ul>
 		</nav>
 		<div class="row center container">
-			<div class="container info col s5 m2 l2">
+			<div class="container info col s6 m2 l2 hoverable">
 				Total Fuel Cost: <br>
 				$<%=totalCost%>
 			</div>
-			<div class="container info col s5 m2 l2">
+			<div class="container info col s6 m2 l2 hoverable">
 				Total Gallons: <br>
 				<%=totalGal%>
 			</div>
-			<div class="container info col s5 m2 l2">
+			<div class="container info col s6 m2 l2 hoverable">
 				Total Miles: <br>
 				<% if (Data.length > 1) { %>
 					<%=Data[Data.length - 1].odometer - Data[0].odometer%>
@@ -44,21 +44,21 @@
 					Not Enough Data
 				<% } %>
 			</div>
-			<div class="container info col s5 m2 l2">
+			<div class="container info col s6 m2 l2 hoverable">
 				Best MPG: <br>
 				<%=bestMpg%>
 			</div>
-			<div class="container info col s5 m2 l2">
+			<div class="container info col s6 m2 l2 hoverable">
 				Last MPG: <br>
 				<%=lastMpg%>
 			</div>
-			<div class="container info col s5 m2 l2">
+			<div class="container info col s6 m2 l2 hoverable">
 				Fuel logs: <br>
 				<%=totalLogs%>
 			</div>
 		</div>
 		<div class="container">
-			<table class="container">
+			<table class="responsive-table centered highlight">
 				<tr>
 					<th>Index</th>
 					<th>Odometer</th>
@@ -95,30 +95,34 @@
 			</table>
 		</div>
 		<div class="row center container">
-			<div class="container info col s5 m3 l3">
+			<div class="container info col s6 m3 l3 hoverable">
 				Avg MPG: <br>
 				<%=avgMpg%>
 			</div>
-			<div class="container info col s5 m3 l3">
+			<div class="container info col s6 m3 l3 hoverable">
 				Avg Price/Gal: <br>
 				$<%=avgPrice%>
 			</div>
-			<div class="container info col s5 m3 l3">
+			<div class="container info col s6 m3 l3 hoverable">
 				Avg Fuel Up Cost: <br>
 				$<%=avgFuelup%>
 			</div>
-			<div class="container info col s5 m3 l3">
+			<div class="container info col s6 m3 l3 hoverable">
 				Avg Price/Mile: <br>
 				$<%=avgPMile%>
 			</div>
 		</div>
 
-		<div class="container row">
-			<div class="container col s5 m6 l6 center">
-				<div id="pie">Fuel Types</div>
+		<div class="container row center">
+			<div class="container col s12 m6 l6">
+				<div id="pie"></div>
 			</div>
-			<div id="brand"></div>
-			<div id="line"></div>
+			<div class="container col s12 m6 l6">
+				<div id="brand"></div>
+			</div>
+			<div class="container col s12 m6 l6 offset-l3 offset-m3 center">
+				<div id="line">Miles Per Gallon</div>
+			</div>
 		</div>
 			<script type="text/javascript">
 				pieChart(<%-JSON.stringify(chartData)%>)

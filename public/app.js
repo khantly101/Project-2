@@ -135,19 +135,19 @@ const brandChart = (chartData) => {
 
 
 const lineChart = (chartData) => {
-	let width = 1000
-	let height = 500
+	let width = 600
+	let height = 300
 
 	let vis = d3.select("#line")
 				.append("svg")
 				.attr("width", width)
 				.attr("height", height)
 
-	let xScale = d3.scaleLinear().domain([0, 10]).range([0, 1000])
+	let xScale = d3.scaleLinear().domain([0, 10]).range([0, 600])
 	let xAxis = d3.axisBottom().scale(xScale)
-	let x = vis.append("g").attr("class", "x axis").attr("transform", "translate(25,470)").call(xAxis)
+	let x = vis.append("g").attr("class", "x axis").attr("transform", "translate(25,270)").call(xAxis)
 
-	let yScale = d3.scaleLinear().domain([40, 0]).range([0, 500])
+	let yScale = d3.scaleLinear().domain([40, 0]).range([0, 300])
 	let yAxis = d3.axisLeft().scale(yScale)
 	let y = vis.append("g").attr("class", "y axis").attr("transform", "translate(25, -30)").call(yAxis)
 

@@ -27,82 +27,103 @@
 				</div>
 			</ul>
 		</nav>
-		<h1>
-    		<% if(currentUser) { %>
-    		    Welcome <%=currentUser.username%>!
-    		<% } else { %>
-    		    Welcome!
-    		<% } %>
-		</h1>
-		<table class="container">
-			<tr>
-				<th>Index</th>
-				<th>Odometer</th>
-				<th>Fuel Type</th>
-				<th>Gallons</th>
-				<th>Total Cost</th>
-				<th>Cost/Gal</th>
-				<th>Location</th>
-				<th>Dates</th>
-				<th>Miles Per Gallon</th>
-				<th>Brand</th>
-			</tr>
-
-			<% Data.forEach((ele, index) => { %>
-				<% let milesPerGal = 0 %>
-
-				<% if (index !== 0) { %>
-					<% milesPerGal = (Data[index].odometer - Data[index - 1].odometer)/Data[index-1].gallons %>
-				<% } %>
-
-				<tr>
-					<th><a href="main/<%=ele.id%>"><%=index%></a></th>
-					<th><%=ele.odometer%></th>
-					<th><%=ele.type%></th>
-					<th><%=ele.gallons%></th>
-					<th>$<%=ele.total%></th>
-					<th>$<%=ele.pergal%></th>
-					<th><%=ele.location%></th>
-					<th><%=ele.date%></th>
-					<th><%=milesPerGal%></th>
-					<th><%=ele.brand%></th>
-				</tr>
-			<% }) %>
-
-
-			<div class="container">
+		<div class="row center container">
+			<div class="container info col s5 m2 l2">
 				Total Fuel Cost: <br>
-				<%=totalCost%>
+				$<%=totalCost%>
 			</div>
-			<div class="container">
+			<div class="container info col s5 m2 l2">
 				Total Gallons: <br>
 				<%=totalGal%>
 			</div>
-			<div class="container">
+			<div class="container info col s5 m2 l2">
 				Total Miles: <br>
-				<% if (Data.lenth > 1) { %>
+				<% if (Data.length > 1) { %>
 					<%=Data[Data.length - 1].odometer - Data[0].odometer%>
 				<% } else { %>
 					Not Enough Data
 				<% } %>
 			</div>
-			<div class="container">
-				Best Miles Per Gallon: <br>
+			<div class="container info col s5 m2 l2">
+				Best MPG: <br>
 				<%=bestMpg%>
 			</div>
-			<div class="container">
-				Last Miles Per Gallon: <br>
+			<div class="container info col s5 m2 l2">
+				Last MPG: <br>
 				<%=lastMpg%>
 			</div>
+			<div class="container info col s5 m2 l2">
+				Fuel logs: <br>
+				<%=totalLogs%>
+			</div>
+		</div>
+		<div class="container">
+			<table class="container">
+				<tr>
+					<th>Index</th>
+					<th>Odometer</th>
+					<th>Fuel Type</th>
+					<th>Gallons</th>
+					<th>Total Cost</th>
+					<th>Cost/Gal</th>
+					<th>Location</th>
+					<th>Dates</th>
+					<th>Miles Per Gallon</th>
+					<th>Brand</th>
+				</tr>
 
-			<div id="pie"></div>
-			<div id="line"></div>
+				<% Data.forEach((ele, index) => { %>
+					<% let milesPerGal = 0 %>
+
+					<% if (index !== 0) { %>
+						<% milesPerGal = (Data[index].odometer - Data[index - 1].odometer)/Data[index-1].gallons %>
+					<% } %>
+
+					<tr>
+						<th><a href="main/<%=ele.id%>"><%=index%></a></th>
+						<th><%=ele.odometer%></th>
+						<th><%=ele.type%></th>
+						<th><%=ele.gallons%></th>
+						<th>$<%=ele.total%></th>
+						<th>$<%=ele.pergal%></th>
+						<th><%=ele.location%></th>
+						<th><%=ele.date.toLocaleDateString()%></th>
+						<th><%=Math.round(milesPerGal * 100) / 100%></th>
+						<th><%=ele.brand%></th>
+					</tr>
+				<% }) %>
+			</table>
+		</div>
+		<div class="row center container">
+			<div class="container info col s5 m3 l3">
+				Avg MPG: <br>
+				<%=avgMpg%>
+			</div>
+			<div class="container info col s5 m3 l3">
+				Avg Price/Gal: <br>
+				$<%=avgPrice%>
+			</div>
+			<div class="container info col s5 m3 l3">
+				Avg Fuel Up Cost: <br>
+				$<%=avgFuelup%>
+			</div>
+			<div class="container info col s5 m3 l3">
+				Avg Price/Mile: <br>
+				$<%=avgPMile%>
+			</div>
+		</div>
+
+		<div class="container row">
+			<div class="container col s5 m6 l6 center">
+				<div id="pie">Fuel Types</div>
+			</div>
 			<div id="brand"></div>
+			<div id="line"></div>
+		</div>
 			<script type="text/javascript">
 				pieChart(<%-JSON.stringify(chartData)%>)
 				lineChart(<%-JSON.stringify(lineData)%>)
 				brandChart(<%-JSON.stringify(brandData)%>)
 			</script>
-		</table>
 	</body>
 </html>

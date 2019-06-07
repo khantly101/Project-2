@@ -31,13 +31,11 @@ router.get('/', (req, res) => {
 				totalGal += ele.gallons
 
 				let brandInd = brandData.findIndex((elem) => {return elem.Brand === ele.brand})
-				console.log(brandInd)
 				if (brandInd !== -1) {
 					brandData[brandInd].presses += 1
 				} else {
 					brandData.push({"Brand" : ele.brand , "presses" : 1})
 				}
-				console.log(brandData)
 
 				if (index !== 0) {
 					milesPerGal = (userData.data[index].odometer - userData.data[index - 1].odometer)/userData.data[index-1].gallons
@@ -64,16 +62,27 @@ router.get('/', (req, res) => {
 				}
 			})
 
+			let avgMpg = (userData.data[userData.data.length - 1].odometer - userData.data[0].odometer) / totalGal
+			let avgPrice = totalCost / totalGal
+			let avgFuelup = totalCost / (userData.data.length - 1)
+			let avgPMile = totalCost / (userData.data[userData.data.length - 1].odometer - userData.data[0].odometer)
+			let totalLogs = userData.data.length
+
 			res.render('index.ejs', {
 				currentUser: req.session.currentUser,
 				Data: userData.data,
-				totalCost: totalCost,
-				totalGal: totalGal,
-				bestMpg: bestMpg,
-				lastMpg: lastMpg,
+				totalCost: Math.round(totalCost * 100) / 100,
+				totalGal: Math.floor(totalGal),
+				bestMpg: Math.round(bestMpg * 100) / 100,
+				lastMpg: Math.round(lastMpg * 100) / 100,
 				chartData: chartData,
 				lineData: lineData,
-				brandData: brandData
+				brandData: brandData,
+				avgMpg: Math.round(avgMpg * 100) / 100,
+				avgPrice: Math.round(avgPrice * 100) / 100,
+				avgFuelup: Math.round(avgFuelup * 100) / 100,
+				avgPMile: Math.round(avgPMile * 100) /100,
+				totalLogs: totalLogs
 			})
 		}).populate('data')
 	} else {

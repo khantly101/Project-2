@@ -1,4 +1,24 @@
 /*/////////////////////////*/
+/*////////Body////////////*/
+/*///////////////////////*/
+
+body {
+	background-color: lightgrey;	
+	font-family: "Oswald", sans-serif;
+}
+
+/*/////////////////////////*/
+/*////////INDEX///////////*/
+/*///////////////////////*/
+
+.info {
+	margin-top: 3%;
+	background-color: white;
+	border: 1.5px solid black;
+	border-radius: 3px;
+}
+
+/*/////////////////////////*/
 /*////////SIDENAV/////////*/
 /*///////////////////////*/
 

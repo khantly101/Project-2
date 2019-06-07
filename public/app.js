@@ -84,7 +84,7 @@ const brandChart = (chartData) => {
     	.style("fill", "grey")
 
 	g.append("path").attr("d", arc).style("fill", (d) => {
-		return color(d.data.Type)
+		return color(d.data.Brand)
 	})
 
 	

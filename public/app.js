@@ -226,5 +226,4 @@ const lineChart = (chartData) => {
 
 $(() => {
 	selectDrop()
-	initMap()
 })

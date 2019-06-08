@@ -53,11 +53,11 @@ router.get('/', (req, res) => {
 			})
 
 			if (userData.data[userData.data.length - 1]) {
-				let avgMpg = (userData.data[userData.data.length - 1].odometer - userData.data[0].odometer) / totalGal
-				let avgPMile = totalCost / (userData.data[userData.data.length - 1].odometer - userData.data[0].odometer)
+				avgMpg = (userData.data[userData.data.length - 1].odometer - userData.data[0].odometer) / totalGal
+				avgPMile = totalCost / (userData.data[userData.data.length - 1].odometer - userData.data[0].odometer)
 			} else {
-				let avgMpg = "Not enough Data"
-				let avgPMile = "Not enough Data"
+				avgMpg = "Not enough Data"
+				avgPMile = "Not enough Data"
 			}
 
 			let avgPrice = totalCost / totalGal

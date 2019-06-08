@@ -5,7 +5,6 @@
 body {
 	background-color: lightgrey;	
 	font-family: "Oswald", sans-serif;
-	font-size: calc(12px + (26 - 14) * ((100vw - 300px) / (1600 - 300)))
 }
 
 /*/////////////////////////*/

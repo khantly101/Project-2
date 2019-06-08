@@ -178,7 +178,7 @@ const brandChart = (chartData) => {
 
 
 const lineChart = (chartData) => {
-	let width = 1000 
+	let width = 920 
 	let height = width * .7 
 
 	let vis = d3.select("#line")

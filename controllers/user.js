@@ -123,9 +123,12 @@ router.get('/:id', (req, res) => {
 
 	if (req.session.currentUser) {
 		if (req.params.id === req.session.currentUser.username) {
-			res.render('profile.ejs', {
-				currentUser: req.session.currentUser,
-				PassMessage : passMessage
+			User.findOne({ username: req.session.currentUser.username }, (err, foundUser) => {
+				res.render('profile.ejs', {
+					currentUser: req.session.currentUser,
+					PassMessage : passMessage,
+					Data: foundUser 
+				})
 			})
 		} else {
 			res.redirect('../main')
@@ -133,7 +136,6 @@ router.get('/:id', (req, res) => {
 	} else {
 		res.redirect('/')
 	}
-
 })
 
 //////////////////////////////
@@ -142,7 +144,13 @@ router.get('/:id', (req, res) => {
 
 router.post('/Newbrand', (req, res) => {
 	User.findOneAndUpdate({ username: req.session.currentUser.username }, { $push: {userBrands: req.body.userBrands}}, (err, foundUser) => {
-		res.redirect('../main')
+		res.redirect('/users/' + req.session.currentUser.username)
+	})
+})
+
+router.post('/Newcar', (req, res) => {
+	User.findOneAndUpdate({ username: req.session.currentUser.username }, { $set: {car: req.body.car}}, (err, foundUser) => {
+		res.redirect('/users/' + req.session.currentUser.username)
 	})
 })
 

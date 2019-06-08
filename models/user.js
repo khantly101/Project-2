@@ -5,7 +5,8 @@ const UserSchema = Schema({
 	username	:	{type: String, required: true, unique: true},
 	password	:	{type: String, required: true},
 	data		:	[{type: mongoose.Schema.Types.ObjectId, ref: 'data'}],
-	userBrands	:	[String]
+	userBrands	:	[String],
+	car			:	String
 })
 
 const User = mongoose.model('user', UserSchema)

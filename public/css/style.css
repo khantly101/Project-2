@@ -132,3 +132,7 @@ line {
 	height: 80vh;
  	background-color: grey;
 }
+
+.tooltip {
+	display: none;
+}

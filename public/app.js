@@ -8,10 +8,6 @@ let InfoWindow
 let markers = []
 let autocomplete
 
-// var map, places, infoWindow;
-//       var markers = [];
-//       var autocomplete;
-
 const initMap = () => {
 
 	map = new google.maps.Map(document.getElementById("map"), {
@@ -23,13 +19,13 @@ const initMap = () => {
 		streetViewControl: false
 	})
 
-	infoWindow = new google.maps.InfoWindow({ content: document.getElementById('info-content') })
+	infoWindow = new google.maps.InfoWindow({ content: document.getElementById("info-content") })
 
-	autocomplete = new google.maps.places.Autocomplete((document.getElementById("autocomplete")), {types: ["(cities)"], componentRestrictions: {'country': 'us'}})
+	autocomplete = new google.maps.places.Autocomplete((document.getElementById("autocomplete")), {types: ["(cities)"], componentRestrictions: {"country": "us"}})
 
 	places = new google.maps.places.PlacesService(map)
 
-	autocomplete.addListener('place_changed', changeLocation)
+	autocomplete.addListener("place_changed", changeLocation)
 }
 
 const changeLocation = () => {
@@ -40,10 +36,9 @@ const changeLocation = () => {
 		map.setZoom(12)
 		search()
 	} else {
-		document.getElementById('autocomplete').placeholder = "Enter a city"
+		document.getElementById("autocomplete").placeholder = "Enter a city"
 	}
 }
-
 
 const search = () => {
 	let searchType = {
@@ -56,7 +51,7 @@ const search = () => {
 			clearMarkers()
 
 			for (let i = 0; i < results.length; i++) {
-				let markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26))
+				let markerLetter = String.fromCharCode("A".charCodeAt(0) + (i % 26))
 
 				markers[i] = new google.maps.Marker({
 					position: results[i].geometry.location,
@@ -64,7 +59,16 @@ const search = () => {
 				});
 
 				markers[i].placeResult = results[i];
-				google.maps.event.addListener(markers[i], 'click', showInfoWindow);
+				google.maps.event.addListener(markers[i], "click", () => {
+					let marker = markers[i]
+					places.getDetails({placeId: marker.placeResult.place_id}, (place, status) => {
+						if (status !== google.maps.places.PlacesServiceStatus.OK) {
+							return
+						}
+						infoWindow.open(map, marker)
+						makeTooltip(place)
+					})
+				})
 				setTimeout(dropMarker(i), i * 100);
 			}
 		}
@@ -86,20 +90,9 @@ const dropMarker = (ele) => {
 	}
 }
 
-function showInfoWindow () {
-	let marker = this
-	places.getDetails({placeId: marker.placeResult.place_id}, (place, status) => {
-		if (status !== google.maps.places.PlacesServiceStatus.OK) {
-			return
-		}
-		infoWindow.open(map, marker)
-		buildIWContent(place)
-	})
-}
-
-const buildIWContent = (place) => {
-	document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url + '">' + place.name + '</a></b>';
-	document.getElementById('iw-address').textContent = place.vicinity;
+const makeTooltip = (place) => {
+	document.getElementById("locName").innerHTML = '<b><a href="' + place.url + '">' + place.name + "</a></b>";
+	document.getElementById("address").textContent = place.vicinity;
 }
 
 //////////////////////////////

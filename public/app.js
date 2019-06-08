@@ -1,4 +1,108 @@
 //////////////////////////////
+// MAP API
+//////////////////////////////
+
+let map
+let places
+let InfoWindow
+let markers = []
+let autocomplete
+
+// var map, places, infoWindow;
+//       var markers = [];
+//       var autocomplete;
+
+const initMap = () => {
+
+	map = new google.maps.Map(document.getElementById("map"), {
+		center: {lat: 37.1, lng: -95.7}, 
+		zoom: 3, 
+		mapTypeControl: false,
+		panControl: false,
+		zoomControl: false,
+		streetViewControl: false
+	})
+
+	infoWindow = new google.maps.InfoWindow({ content: document.getElementById('info-content') })
+
+	autocomplete = new google.maps.places.Autocomplete((document.getElementById("autocomplete")), {types: ["(cities)"], componentRestrictions: {'country': 'us'}})
+
+	places = new google.maps.places.PlacesService(map)
+
+	autocomplete.addListener('place_changed', changeLocation)
+}
+
+const changeLocation = () => {
+	let place = autocomplete.getPlace()
+
+	if (place.geometry) {
+		map.panTo(place.geometry.location)
+		map.setZoom(12)
+		search()
+	} else {
+		document.getElementById('autocomplete').placeholder = "Enter a city"
+	}
+}
+
+
+const search = () => {
+	let searchType = {
+		bounds: map.getBounds(),
+		type: ["gas_station"]
+	}
+
+	places.nearbySearch(searchType, (results, status) => {
+		if (status === google.maps.places.PlacesServiceStatus.OK) {
+			clearMarkers()
+
+			for (let i = 0; i < results.length; i++) {
+				let markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26))
+
+				markers[i] = new google.maps.Marker({
+					position: results[i].geometry.location,
+					animation: google.maps.Animation.DROP,
+				});
+
+				markers[i].placeResult = results[i];
+				google.maps.event.addListener(markers[i], 'click', showInfoWindow);
+				setTimeout(dropMarker(i), i * 100);
+			}
+		}
+	})
+}
+
+const clearMarkers = () => {
+	markers.forEach((ele) => {
+		if (ele) {
+			ele.setMap(null)
+		}
+	})
+	markers = []
+}
+
+const dropMarker = (ele) => {
+	return () => {
+		markers[ele].setMap(map)
+	}
+}
+
+function showInfoWindow () {
+	let marker = this
+	places.getDetails({placeId: marker.placeResult.place_id}, (place, status) => {
+		if (status !== google.maps.places.PlacesServiceStatus.OK) {
+			return
+		}
+		infoWindow.open(map, marker)
+		buildIWContent(place)
+	})
+}
+
+const buildIWContent = (place) => {
+	document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url + '">' + place.name + '</a></b>';
+	document.getElementById('iw-address').textContent = place.vicinity;
+}
+
+//////////////////////////////
 // SIDENAV
 //////////////////////////////
 
@@ -88,7 +192,7 @@ const lineChart = (chartData) => {
 				.append("svg")
 				.attr("width", "100%")
 				.attr("height", "100%")
-				.attr("viewBox", "0 0 " + Math.min(width,height) + " " + Math.min(width,height))
+				.attr("viewBox", "0 0 " + Math.min(width,height) + " " + Math.min(width/2,height/2))
 
 	let xScale = d3.scaleLinear().domain([0, 10]).range([0, 600])
 	let xAxis = d3.axisBottom().scale(xScale)
@@ -129,4 +233,5 @@ const lineChart = (chartData) => {
 
 $(() => {
 	selectDrop()
+	initMap()
 })

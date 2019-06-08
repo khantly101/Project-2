@@ -18,9 +18,9 @@
 				</div>
 				<div class="sideNavButtonContainer">
 					<li class="active sideNavButton"><a href="/main"><i class="material-icons">home</i>Home</a></li>
+					<li class="active sideNavButton"><a href="/main/new"><i class="material-icons">add</i>Log Fuel</a></li>
 					<li class="active sideNavButton"><a href="/users/<%=currentUser.username%>"><i class="material-icons">account_box</i>Profile</a></li>
-					<li class="active sideNavButton"><a href="/main/new"><i class="material-icons">add</i>New Data</a></li>
-					<li class="active sideNavButton"><a href="#"><i class="material-icons">map</i>Maps</a></li>
+					<li class="active sideNavButton"><a href="/main/map"><i class="material-icons">map</i>Maps</a></li>
 					<form class="logout" action="/users?_method=DELETE" method="POST">
 						<li class="active sideNavButton"><a href="#" onclick="logout()"><i class="material-icons">cancel</i>Log Out</a></li>
 					</form>
@@ -28,12 +28,12 @@
 			</ul>
 		</nav>
 		<div class="row container">
-			<div class="col l4 s12">
-				<h4>Enter Data Here</h4>
-				<form action="/main" method="POST">
+			<h4>Enter Data Here</h4>
+			<form action="/main" method="POST">
+				<div class="col s12 m12 l6">
 					Odometer:<input type="text" name="odometer" placeholder="0.000.00">
 					Fuel Type: 					
-						<div class="input-field col s12">
+						<div class="input-field">
 							<select name="type">
 								<option value="Low">Low</option>
 								<option value="Regular">Regular</option>
@@ -42,9 +42,14 @@
 								<option value="Premium">Premium</option>
 								<option value="Super Premium">Super Premium</option>
 							</select>
-						</div><br>
+						</div>
+					Gallons: <input type="text" name="gallons" placeholder="00.00">
+					Cost/Gal: <input type="text" name="pergal" placeholder="$00.00">
+				</div>
+				<div class="col s12 m12 l6">
+					Total Cost: <input type="text" name="total" placeholder="$00.00">
 					Brand: 
-						<div class="input-field col s12">						
+						<div class="input-field">						
 							<select name="brand">
 								<option value="Shell">Shell</option>
 								<option value="Chevron">Chevron</option>
@@ -56,15 +61,12 @@
 									<option value="<%=ele%>"><%=ele%></option>
 								<% }) %>
 							</select>
-						</div><br>
-					Gallons: <input type="text" name="gallons" placeholder="00.00">
-					Total Cost: <input type="text" name="total" placeholder="$00.00">
-					Cost/Gal: <input type="text" name="pergal" placeholder="$00.00">
+						</div>
 					Location: <input type="text" name="location" placeholder="--">
 					Date: <input type="text" name="date" placeholder="YYYY-MM-DD">
-					<button type="submit" class="btn waves-effect waves-light left">Submit <i class="material-icons right">publish</i></button>
-				</form>
-			</div>
+				</div>
+				<button type="submit" class="btn waves-effect waves-light left">Submit <i class="material-icons right">publish</i></button>
+			</form>
 		</div>
 	</body>
 </html>

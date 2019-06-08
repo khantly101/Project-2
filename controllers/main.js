@@ -84,6 +84,20 @@ router.get('/', (req, res) => {
 })
 
 //////////////////////////////
+// Map
+//////////////////////////////
+
+router.get('/map', (req, res) => {
+	if (req.session.currentUser){
+			res.render('map.ejs', {
+				currentUser: req.session.currentUser,
+			})
+	} else {
+		res.redirect('../users')
+	}
+})
+
+//////////////////////////////
 // NEW
 //////////////////////////////
 

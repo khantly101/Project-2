@@ -18,44 +18,52 @@
 				</div>
 				<div class="sideNavButtonContainer">
 					<li class="active sideNavButton"><a href="/main"><i class="material-icons">home</i>Home</a></li>
-					<li class="active sideNavButton"><a href="/users/<%=currentUser.username%>"><i class="material-icons">account_box</i>Profile</a></li>
 					<li class="active sideNavButton"><a href="/main/new"><i class="material-icons">add</i>New Data</a></li>
-					<li class="active sideNavButton"><a href="#"><i class="material-icons">map</i>Maps</a></li>
+					<li class="active sideNavButton"><a href="/users/<%=currentUser.username%>"><i class="material-icons">account_box</i>Profile</a></li>
+					<li class="active sideNavButton"><a href="/main/map"><i class="material-icons">map</i>Maps</a></li>
 					<form class="logout" action="/users?_method=DELETE" method="POST">
 						<li class="active sideNavButton"><a href="#" onclick="logout()"><i class="material-icons">cancel</i>Log Out</a></li>
 					</form>
 				</div>
 			</ul>
 		</nav>
-		<table class="container">
-			<tr>
-				<th>Odometer</th>
-				<th>Fuel Type</th>
-				<th>Gallons</th>
-				<th>Total Cost</th>
-				<th>Cost/Gal</th>
-				<th>Location</th>
-				<th>Dates</th>
-			</tr>
-			<tr>
-				<th><%=Data.odometer%></th>
-				<th><%=Data.type%></th>
-				<th><%=Data.gallons%></th>
-				<th>$<%=Data.total%></th>
-				<th>$<%=Data.pergal%></th>
-				<th><%=Data.location%></th>
-				<th><%=Data.date%></th>
-			</tr>
-		</table>
+		<br>
 		<div class="container">
-			<br>
-			<form action="<%=Data.id%>/edit">
-				<button class="btn waves-effect waves-light">Edit<i class="material-icons right">edit</i></button>
-			</form>
-			<br>
-			<form action="<%=Data.id%>?_method=DELETE" method="POST">
-				<button class="btn waves-effect waves-light">Delete<i class="material-icons right">delete</i></button>
-			</form>
+			<table class="responsive-table centered highlight">
+				<tr>
+					<th>Odometer</th>
+					<th>Fuel Type</th>
+					<th>Gallons</th>
+					<th>Total Cost</th>
+					<th>Cost/Gal</th>
+					<th>Location</th>
+					<th>Dates</th>
+					<th>Brand</th>
+				</tr>
+				<tr>
+					<th><%=Data.odometer%></th>
+					<th><%=Data.type%></th>
+					<th><%=Data.gallons%></th>
+					<th>$<%=Data.total%></th>
+					<th>$<%=Data.pergal%></th>
+					<th><%=Data.location%></th>
+					<th><%=Data.date.toLocaleDateString()%></th>
+					<th><%=Data.brand%></th>
+				</tr>
+			</table>
+		</div>
+		<br>
+		<div class="row container">
+			<div class="col l1">
+				<form action="<%=Data.id%>/edit">
+					<button class="btn waves-effect waves-light">Edit<i class="material-icons right">edit</i></button>
+				</form>				
+			</div>
+			<div class="col l1">
+				<form action="<%=Data.id%>?_method=DELETE" method="POST">
+					<button class="btn waves-effect waves-light">Delete<i class="material-icons right">delete</i></button>
+				</form>	
+			</div>
 		</div>
 	</body>
 </html>

@@ -18,7 +18,7 @@
 				</div>
 				<div class="sideNavButtonContainer">
 					<li class="active sideNavButton"><a href="/main"><i class="material-icons">home</i>Home</a></li>
-					<li class="active sideNavButton"><a href="/main/new"><i class="material-icons">add</i>New Data</a></li>
+					<li class="active sideNavButton"><a href="/main/new"><i class="material-icons">add</i>Log Fuel</a></li>
 					<li class="active sideNavButton"><a href="/users/<%=currentUser.username%>"><i class="material-icons">account_box</i>Profile</a></li>
 					<li class="active sideNavButton"><a href="/main/map"><i class="material-icons">map</i>Maps</a></li>
 					<form class="logout" action="/users?_method=DELETE" method="POST">
@@ -27,40 +27,26 @@
 				</div>
 			</ul>
 		</nav>
-		<br>
-		<div class="row container login">
-			<div class="col l1">
-				
-			</div>
-			<div class="col l4 s12">
-				<h4>Login Here</h4>
-				<p class="wrong red-text"><%=PassMessage%></p>
-				<form action="/users/login" method="POST">
-					Username: <input type="text" name="username" placeholder="Username">
-					Password: <input type="password" name="password">
-					<button type="submit" class="btn waves-effect waves-light">Login <i class="material-icons right">publish</i></button>
-				</form>
-			</div>
-			<div class="col l1">
-				<br>
-				<div class="middleBar">
-					
-				</div>
-				<br>
-			</div>
-			<div class="col l4 s12">
-				<h4>Sign Up Here</h3>
-				<p class="wrong red-text"><%=UserMessage%></p>
-				<p class="wrong red-text"><%=MissMessage%></p>
-				<form action="/users" method="POST">
-					Username: <input type="text" name="username" placeholder="Username">
-					Password: <input type="password" name="password">
-					<button type="submit" class="btn waves-effect waves-light">Sign Up<i class="material-icons right">publish</i></button>
-				</form>
-			</div>
-			<div class="col l1">
-				
+
+		<div class="container">
+			<input type="text" id="autocomplete" placeholder="Enter Address here">
+			<div id="map"></div>
+		</div>
+
+		<div style="display: none">
+			<div id="info-content">
+				<table>
+					<tr id="iw-url-row" class="iw_table_row">
+						<td id="iw-url"></td>
+					</tr>
+					<tr id="iw-address-row" class="iw_table_row">
+						<td class="iw_attribute_name">Address:</td>
+						<td id="iw-address"></td>
+					</tr>
+				</table>
 			</div>
 		</div>
+
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7Xv5vlLMZ7_BAVVDonIrYU4c2-dUNsGI&libraries=places"></script>
 	</body>
 </html>

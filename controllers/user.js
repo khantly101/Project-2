@@ -8,8 +8,6 @@ const Data		= require('../models/data.js')
 const User 		= require('../models/user.js')
 
 const router 	= express.Router()
-
-const API		= process.env.API
 //////////////////////////////
 // Variable
 //////////////////////////////
@@ -46,8 +44,7 @@ router.get('/', (req, res) => {
 		PassMessage : passMessage,
 		MissMessage : missMessage,
 		UserMessage : userMessage, 
-		currentUser : standin,
-		API: API
+		currentUser : standin
 	})
 })
 
@@ -130,8 +127,7 @@ router.get('/:id', (req, res) => {
 				res.render('profile.ejs', {
 					currentUser: req.session.currentUser,
 					PassMessage : passMessage,
-					Data: foundUser,
-					API: API
+					Data: foundUser 
 				})
 			})
 		} else {

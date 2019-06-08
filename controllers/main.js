@@ -77,8 +77,7 @@ router.get('/', (req, res) => {
 				avgPrice: Math.round(avgPrice * 100) / 100,
 				avgFuelup: Math.round(avgFuelup * 100) / 100,
 				avgPMile: Math.round(avgPMile * 100) /100,
-				totalLogs: totalLogs,
-				API: API
+				totalLogs: totalLogs
 			})
 		}).populate('data')
 	} else {
@@ -111,8 +110,7 @@ router.get('/new', (req, res) => {
 		User.findOne({ username: req.session.currentUser.username }, (err, userData) => {
 			res.render('new.ejs', {
 				currentUser: req.session.currentUser,
-				Brands: userData.userBrands,
-				API: API
+				Brands: userData.userBrands
 			})
 		})
 	} else {
@@ -143,8 +141,7 @@ router.get('/:id', (req, res) => {
 				Data.findById(req.params.id, (err, foundData) => {
 					res.render('show.ejs', {
 						currentUser: req.session.currentUser,
-						Data: foundData,
-						API: API
+						Data: foundData
 					})
 				})
 			} else {
@@ -167,8 +164,7 @@ router.get('/:id/edit', (req, res) => {
 				res.render('edit.ejs', {
 					currentUser: req.session.currentUser,
 					Brands: userData.userBrands,
-					Data: foundData,
-					API: API
+					Data: foundData
 				})
 			})
 		})

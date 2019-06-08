@@ -1,12 +1,15 @@
 //////////////////////////////
 // CONTROLLER
 //////////////////////////////
+require('dotenv').config()
 
-const express 	= require('express')
+const express	= require('express')
 const Data		= require('../models/data.js')
 const User		= require('../models/user.js')
 
-const router 	= express.Router()
+const router	= express.Router()
+
+const API		= process.env.API
 
 //////////////////////////////
 // INDEX 
@@ -91,6 +94,7 @@ router.get('/map', (req, res) => {
 	if (req.session.currentUser){
 			res.render('map.ejs', {
 				currentUser: req.session.currentUser,
+				API: API
 			})
 	} else {
 		res.redirect('../users')

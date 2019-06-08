@@ -67,7 +67,9 @@
 						<th>$<%=ele.total%></th>
 						<th>$<%=ele.pergal%></th>
 						<th><%=ele.location%></th>
-						<th><%=ele.date.toLocaleDateString()%></th>
+						<% if (ele.date) { %>
+							<th><%=ele.date.toLocaleDateString()%></th>
+						<% } %>
 						<th><%=Math.round(milesPerGal * 100) / 100%></th>
 						<th><%=ele.brand%></th>
 					</tr>

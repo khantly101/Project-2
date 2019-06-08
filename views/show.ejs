@@ -27,7 +27,9 @@
 					<th>$<%=Data.total%></th>
 					<th>$<%=Data.pergal%></th>
 					<th><%=Data.location%></th>
-					<th><%=Data.date.toLocaleDateString()%></th>
+					<% if (Data.date) { %>
+						<th><%=Data.date.toLocaleDateString()%></th>
+					<% } %>
 					<th><%=Data.brand%></th>
 				</tr>
 			</table>
@@ -42,6 +44,11 @@
 			<div class="col l1">
 				<form action="<%=Data.id%>?_method=DELETE" method="POST">
 					<button class="btn waves-effect waves-light">Delete<i class="material-icons right">delete</i></button>
+				</form>	
+			</div>
+			<div class="col l1 right">
+				<form action="/main">
+					<button class="btn waves-effect waves-light">Return<i class="material-icons right">delete</i></button>
 				</form>	
 			</div>
 		</div>

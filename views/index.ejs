@@ -104,9 +104,12 @@
 				<div id="brand"></div>
 			</div>
 		</div>
-			<script type="text/javascript">
-				lineChart(<%-JSON.stringify(lineData)%>)
-				brandChart(<%-JSON.stringify(brandData)%>)
-			</script>
+
+		<script src="https://maps.googleapis.com/maps/api/js?key=<%=API%>&libraries=places"></script>
+		<script type="text/javascript">
+			lineChart(<%-JSON.stringify(lineData)%>)
+			brandChart(<%-JSON.stringify(brandData)%>)
+		</script>
 	</body>
+
 </html>
